@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint ./src/**/*.ts*",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand --coverage"
   },
   "repository": {
     "type": "git",
