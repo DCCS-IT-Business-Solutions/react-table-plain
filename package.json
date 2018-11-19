@@ -4,7 +4,8 @@
   "description": "A NPM package that helps creating HTML tables in a React-way.",
   "main": "build/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "tslint ./src/**/*.ts*"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
   },
   "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-table#readme",
   "dependencies": {
+    "tslint": "^5.11.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.1.6"
   }
 }
