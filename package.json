@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "tslint ./src/**/*.ts*"
+    "lint": "tslint ./src/**/*.ts*",
+    "test": "jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,24 @@
   },
   "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-table#readme",
   "dependencies": {
+    "@types/jest": "^23.3.9",
+    "jest": "^23.6.0",
     "tslint": "^5.11.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.1.6"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)(spec|test).ts?(x)"
+    ]
   }
 }
