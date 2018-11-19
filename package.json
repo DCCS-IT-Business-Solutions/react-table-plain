@@ -1,12 +1,14 @@
 {
-  "name": "react-table",
+  "name": "react-table-plain",
   "version": "0.0.1",
   "description": "A NPM package that helps creating HTML tables in a React-way.",
   "main": "build/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "run-s lint test transpile",
+    "transpile": "tsc",
     "lint": "tslint ./src/**/*.ts*",
-    "test": "jest --runInBand --coverage"
+    "test": "jest --runInBand --coverage",
+    "prepublishOnly": "yarn run build"
   },
   "repository": {
     "type": "git",
