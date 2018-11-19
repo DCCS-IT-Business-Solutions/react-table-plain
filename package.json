@@ -4,7 +4,7 @@
   "description": "A NPM package that helps creating HTML tables in a React-way.",
   "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/DCCS-IT-Business-Solutions/react-table/issues"
   },
-  "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-table#readme"
+  "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-table#readme",
+  "dependencies": {
+    "typescript": "^3.1.6"
+  }
 }
