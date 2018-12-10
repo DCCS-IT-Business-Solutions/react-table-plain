@@ -2,7 +2,7 @@
   "name": "react-table-plain",
   "version": "0.0.4",
   "description": "A NPM package that helps creating HTML tables in a React-way.",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "watch": "tsc --watch",
     "build": "run-s lint test transpile",
