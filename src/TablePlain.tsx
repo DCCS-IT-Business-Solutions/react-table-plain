@@ -96,11 +96,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
             {
               header: "",
               prop: "",
-              render: () => (
-                <td onClick={(e) => this.handleExpansionClick(e, key)}>
-                  {renderIndicator(this.state.showSubComponent[key] === true)}
-                </td>
-              )
+              props: () => ({
+                onClick: (e: React.MouseEvent) =>
+                  this.handleExpansionClick(e, key)
+              }),
+              render: () =>
+                renderIndicator(this.state.showSubComponent[key] === true)
             },
             data,
             -1,
@@ -112,7 +113,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
     if (this.props.subComponent && this.state.showSubComponent[key]) {
       result.push(
-        <Row>
+        <Row key={-1}>
           <Cell colSpan={colDef.length + 1}>
             {this.props.subComponent(data)}
           </Cell>
@@ -214,11 +215,10 @@ export class TablePlain extends React.Component<TableProps, IState> {
     return (
       <Footer>
         <Row>
-          {colDef.map(
-            (def, idx) =>
-              this.props.renderFooterCell != null
-                ? this.props.renderFooterCell(def, data, idx)
-                : this.renderFooterCell(def, data, idx)
+          {colDef.map((def, idx) =>
+            this.props.renderFooterCell != null
+              ? this.props.renderFooterCell(def, data, idx)
+              : this.renderFooterCell(def, data, idx)
           )}
         </Row>
       </Footer>
@@ -242,6 +242,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
     const rot = expanded ? -90 : 90;
     return (
       <div
+        className="expander"
         style={{
           transform: `rotate(${rot}deg)`,
           display: "flex",
@@ -282,12 +283,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
     );
   };
 
-  handleExpansionClick = (e: React.MouseEvent<HTMLElement>, key: number) => {  
+  handleExpansionClick = (e: React.MouseEvent, key: number) => {
     e.stopPropagation();
     this.toggleSubmenu(key);
-  }
+  };
 
-  private toggleSubmenu = (key: number) => {  
+  private toggleSubmenu = (key: number) => {
     this.setState(prev => ({
       showSubComponent: {
         ...prev.showSubComponent,
