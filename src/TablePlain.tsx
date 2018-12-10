@@ -97,7 +97,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
               header: "",
               prop: "",
               render: () => (
-                <td onClick={() => this.toggleSubmenu(key)}>
+                <td onClick={(e) => this.handleExpansionClick(e, key)}>
                   {renderIndicator(this.state.showSubComponent[key] === true)}
                 </td>
               )
@@ -282,7 +282,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
     );
   };
 
-  toggleSubmenu = (key: number) => {
+  handleExpansionClick = (e: React.MouseEvent<HTMLElement>, key: number) => {  
+    e.stopPropagation();
+    this.toggleSubmenu(key);
+  }
+
+  private toggleSubmenu = (key: number) => {  
     this.setState(prev => ({
       showSubComponent: {
         ...prev.showSubComponent,
