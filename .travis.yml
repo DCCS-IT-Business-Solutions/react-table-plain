@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-- node
+  - node
 before_deploy:
-- npm run build
+  - npm run build
 deploy:
+  skip_cleanup: true
   provider: npm
   email: smeissner@dccs.at
   api_key:
