@@ -4,6 +4,7 @@
   "description": "A NPM package that helps creating HTML tables in a React-way.",
   "main": "build/index.js",
   "scripts": {
+    "watch": "tsc --watch",
     "build": "run-s lint test transpile",
     "transpile": "tsc",
     "lint": "tslint ./src/**/*.ts*",
@@ -32,11 +33,9 @@
   },
   "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-table#readme",
   "dependencies": {
-    "@types/jest": "^23.3.9",
-    "jest": "^23.6.0",
-    "tslint": "^5.11.0",
-    "tslint-react": "^3.6.0",
-    "typescript": "^3.1.6"
+    "lodash": "^4.17.11",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -49,7 +48,22 @@
     },
     "testMatch": [
       "**/__tests__/**/*.ts?(x)",
-      "**/?(*.)(spec|test).ts?(x)"
-    ]
+      "c**/?(*.)(spec|test).ts?(x)"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/setupTests.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "@types/lodash": "^4.14.118",
+    "@types/react": "^16.7.13",
+    "@types/react-dom": "^16.0.11",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest": "^23.6.0",
+    "npm-run-all": "^4.1.5",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.1.6"
   }
 }
