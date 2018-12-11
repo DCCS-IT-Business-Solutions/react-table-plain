@@ -6,9 +6,9 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: npm
-  email: smeissner@dccs.at
+  email: stephan.meissner@dccs.at
   api_key:
-    secure: ESjmn3kPQu1WTj7Nu4dzE5TVRs2Q048672KpKl+n1nLkWUFbWZnX/FyuH5sWm7IjfBBxjAh9LRbYyRtYsNvwzXFx6tweP+jxWZ8gQ9STUUzdaGRpKBn5ubZ+IK0wpTn8geEApv9WcPI7vnqNwc4GBR9yRJM4+Te2JE2J5QCS5bvyq4jSVnXlNSFS8Jlqv2+I46iRDpX0AMZzXekndIZDXdv6bCu9lBbfRRy8hW9pDogF3GV3bhFrmo8wJxQeE40Gs2NPWrPa8inAsWFtbqIWoezdWqIdYNNjehCOqXOriCxvT2FFhiymBA6r6tIYthJCDzAJyhU2gPwTI8+uHcXvOwsvFwVUH4/yV4XK/6KsfaY4Br+qiREuE3r9XLV00RY4ZO6mx3nnx+rJgY7Jw8PnLSIuYCCCViAvZ3XexSTwvd4OoRvn/0xTc18uAj0QA11lCpVrm5fq8lCBce1x5RwctEbds5IhbifJK8D/UsvbWsASC+oZCuwsNL/RO25o8GL+XE8UaeGOo0ZuggMSDqZgV0BmGJlReQ79AAKBwoAZ9XBY8MXciz2igS83D0Vey1ga4zKp6npM4muO44KrOsIA5dTMS+MSZ+EMubRda2NEHSOX2VO5HsIm5AD7OHxwTFjkFK5ixYCx4usq7824MCJp/GwFHyOZagaKh4TNmlTQm9M=
+    secure: $NPM_API_KEY 
   on:
     tags: true
     repo: DCCS-IT-Business-Solutions/react-table-plain
