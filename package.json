@@ -1,6 +1,6 @@
 {
   "name": "react-table-plain",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A NPM package that helps creating HTML tables in a React-way.",
   "main": "lib/index.js",
   "scripts": {
