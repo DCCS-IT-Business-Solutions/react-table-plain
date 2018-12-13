@@ -1,6 +1,6 @@
 # react-table-plain &middot; ![travis build](https://img.shields.io/travis/DCCS-IT-Business-Solutions/react-table-plain.svg) ![npm version](https://img.shields.io/npm/v/react-table-plain.svg)
 
-A NPM package that helps creating HTML tables in a React-way.
+A NPM package that helps creating HTML tables in a React-way. It was partly inspired by [react-table](https://react-table.js.org).
 
 @dccs/react-table-plain is written in [Typescript](https://www.typescriptlang.org/) and comes with its own type definitions.
 
@@ -14,7 +14,7 @@ You should install [react-table-plain with npm or yarn](https://www.npmjs.com/pa
 
 This command will download and install react-table-plain and all required dependencies.
 
-## Examples
+## Features
 
 ### Minimal version
 
@@ -108,6 +108,53 @@ function sortData(data, prop, desc) {
 
 **IMPORTANT:** react-table-plain doesn't do the sorting. It just displays the data.
 The caller is responsible for sorting the data.
+
+### Render custom cells
+
+TODO
+
+### Set row props
+
+You can set the props of each row, depending on the data for each row. For example to highlight a single row.
+
+```javascript
+import React from "react";
+import { TablePlain } from "@dccs/react-table-plain";
+
+function App() {
+  return (
+    <TablePlain
+      data={[
+        { id: 1, name: "Alexa" },
+        { id: 2, name: "Google Home" },
+        { id: 3, name: "Cortana" }
+      ]}
+      colDef={[
+        {
+          prop: "id",
+          header: "ID"
+        },
+        {
+          prop: "name",
+          header: "User name",
+          sortable: true
+        }
+      ]}
+      rowProps={data => ({
+        style: { background: data.id === 1 ? "yellow" : null }
+      })}
+    />
+  );
+}
+```
+
+### Subcomponent
+
+TODO
+
+### Theming
+
+TODO
 
 ## Contributing
 

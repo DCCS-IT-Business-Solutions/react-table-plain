@@ -25,6 +25,23 @@ it("should call onRowClick if row is clicked", () => {
   expect(handleRowClick).toBeCalled();
 });
 
+it("should set row props", () => {
+  const sut = shallow(
+    <TablePlain
+      data={[{ a: 1, b: 2 }]}
+      desc={false}
+      rowProps={() => ({
+        style: { background: "yellow" },
+        className: "catchMeIfYouCan"
+      })}
+    />
+  );
+
+  const row = sut.find(".catchMeIfYouCan").at(0);
+
+  expect(row.props()).toHaveProperty("style.background");
+});
+
 describe("subComponent", () => {
   it("should not call onRowClick when clicked", () => {
     const handleRowClick = jest.fn();

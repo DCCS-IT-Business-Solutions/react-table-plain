@@ -8,7 +8,8 @@
     "build": "run-s lint test transpile",
     "transpile": "tsc",
     "lint": "tslint ./src/**/*.ts*",
-    "test": "jest --runInBand --coverage"
+    "test": "jest --runInBand --coverage",
+    "test:watch": "jest --runInBand --coverage --watch"
   },
   "repository": {
     "type": "git",

@@ -36,6 +36,7 @@ export interface IProps {
   renderFilter?: (col: IColDef, idx: number) => React.ReactNode;
   renderExpansionIndicator?: (expanded: boolean) => React.ReactNode;
   subComponent?: (data: any) => React.ReactNode;
+  rowProps?: (data: any) => object;
 }
 
 export type TableProps = IProps & ITableElements;
@@ -53,5 +54,4 @@ export interface IColDef {
   footer?: string | ElementContent;
 }
 
-
-export * from "./TablePlain"
+export * from "./TablePlain";

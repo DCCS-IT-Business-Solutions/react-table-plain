@@ -82,6 +82,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
     const Cell: any = this.cellElement;
     const renderIndicator =
       this.props.renderExpansionIndicator || this.renderExpansionIndicator;
+    const props = this.props.rowProps != null && this.props.rowProps(data);
     const result = [
       <Row
         key={key}
@@ -90,6 +91,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
           cursor: this.props.onRowClick ? "pointer" : "default"
         }}
         onClick={() => this.props.onRowClick && this.props.onRowClick(data)}
+        {...props}
       >
         {this.props.subComponent &&
           this.renderCell(
