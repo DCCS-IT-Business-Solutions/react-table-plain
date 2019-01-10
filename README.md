@@ -150,6 +150,34 @@ function App() {
 
 [![Edit react-table-plain rowProps](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/18vv15mo84)
 
+### Fixed Column width
+
+Depending on the displayed data the width of the columns might vary. To prevent that (i.e. during paging) you may set the width of a column.
+How does it work:
+
+```javascript
+colDef={[{
+    prop: "id",
+    header: "ID",
+    width: 1
+  },
+  {
+    prop: "name",
+    header: "Full name",
+    width: 2
+  },
+  {
+    prop: "ocupation",
+    header: "Work",
+    width: 2
+  }]}
+```
+
+The total of all widths is 100% of the table width and each column is sized according to the width value. Like:
+
+- Property "id" has a width of 1 of a total of 5. So the with is 1/5 of 100% that is 20% of the table width.
+- Property "name" has a width of 2. The total width is still 5. So the width is 2/5. That is 40% of the table width.
+
 ### Filter
 
 You can add a filter for each row.
@@ -165,6 +193,7 @@ colDef={[
 ```
 
 This renders a `<input type="text" />` below the `header`.
+`onChangeFilter` reflects any changes to the filter.
 
 #### Custom Filter inputs
 

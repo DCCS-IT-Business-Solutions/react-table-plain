@@ -191,6 +191,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
         {...colDef.headerProps}
         onClick={() => colDef.sortable && this.handleChangeSort(colDef)}
         {...props}
+        width={colDef.width ? `${(colDef.width! / 5.0) * 100}%` : undefined}
       >
         {colDef.header}
         {this.props.orderedBy === colDef &&

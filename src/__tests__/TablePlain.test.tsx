@@ -63,6 +63,34 @@ describe("subComponent", () => {
   });
 });
 
+describe("column width", () => {
+  it("should fix column width", () => {
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        desc={false}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            width: 1
+          },
+          {
+            prop: "b",
+            header: "B",
+            width: 4
+          }
+        ]}
+      />
+    );
+
+    const headerCells = sut.find("th");
+
+    expect(headerCells.first().prop("width")).toBe("20%");
+    expect(headerCells.last().prop("width")).toBe("80%");
+  });
+});
+
 describe("filter", () => {
   it("should render a simple filter", () => {
     const sut = mount(
