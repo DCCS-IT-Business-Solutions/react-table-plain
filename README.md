@@ -173,6 +173,8 @@ colDef={[{
   }]}
 ```
 
+[![Edit react-table-plain rowProps](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/l39m51vk1z)
+
 The total of all widths is 100% of the table width and each column is sized according to the width value. Like:
 
 - Property "id" has a width of 1 of a total of 5. So the with is 1/5 of 100% that is 20% of the table width.
@@ -209,6 +211,8 @@ colDef={[
   }
 ]}
 ```
+
+[![Edit react-table-plain rowProps](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/y0jorjqp41)
 
 The `handleChange` callback enables the table to collect all filter values and provide them to you.
 
