@@ -164,12 +164,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
               width: "1%",
               style: { paddingRight: 0 }
             })}
-          {colDef.map(render)}
+          {colDef.map((col: IColDef, idx) => render(col, idx, undefined))}
         </Row>
         {this.isFilterable && (
           <Row>
             {colDef.map((def, idx) => (
-              <Cell>
+              <Cell key={idx}>
                 {def.filterable
                   ? this.props.renderFilter != null
                     ? this.props.renderFilter(def, idx)
