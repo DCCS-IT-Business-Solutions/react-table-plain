@@ -62,3 +62,77 @@ describe("subComponent", () => {
     expect(handleRowClick).not.toBeCalled();
   });
 });
+
+describe("filter", () => {
+  it("should render a simple filter", () => {
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        desc={false}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            filterable: true
+          }
+        ]}
+      />
+    );
+
+    const inputs = sut.find("input[type='text']");
+
+    expect(inputs.length).toBe(1);
+  });
+
+  it("should render a custom filter component", () => {
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        desc={false}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            filterable: true,
+            renderFilter: () => <hr className="catchMeIfYouCan" />
+          }
+        ]}
+      />
+    );
+
+    const inputs = sut.find(".catchMeIfYouCan");
+
+    expect(inputs.length).toBe(1);
+  });
+
+  it("should collect input from custom filter component", () => {
+    const handleChangeFilter = jest.fn();
+    const optionToSelect = "2";
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        desc={false}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            filterable: true,
+            renderFilter: (v, handleChange) => (
+              <select value={v} onChange={e => handleChange(e.target.value)}>
+                <option>1</option>
+                <option>{optionToSelect}</option>
+              </select>
+            )
+          }
+        ]}
+        onChangeFilter={handleChangeFilter}
+      />
+    );
+
+    const select = sut.find("select");
+    select.simulate("change", { target: { value: optionToSelect } });
+
+    expect(handleChangeFilter).toBeCalled();
+    expect(handleChangeFilter.mock.calls[0][1]).toEqual(optionToSelect);
+  });
+});

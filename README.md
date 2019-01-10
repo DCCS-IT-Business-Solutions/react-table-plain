@@ -150,6 +150,39 @@ function App() {
 
 [![Edit react-table-plain rowProps](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/18vv15mo84)
 
+### Filter
+
+You can add a filter for each row.
+
+```javascript
+colDef={[
+  {
+    prop: "name",
+    header: "Full name",
+    filterable: true
+  }
+]}
+```
+
+This renders a `<input type="text" />` below the `header`.
+
+#### Custom Filter inputs
+
+To render custom filter inputs i.e. a datepicker you can provide the `renderFilter` property with a component.
+
+```javascript
+colDef={[
+  {
+    prop: "name",
+    header: "Full name",
+    filterable: true,
+    renderFilter: (value, handleChange) => <Datepicker value={value} onChange={e => handleChange(e.traget.value)}
+  }
+]}
+```
+
+The `handleChange` callback enables the table to collect all filter values and provide them to you.
+
 ### Subcomponent
 
 TODO

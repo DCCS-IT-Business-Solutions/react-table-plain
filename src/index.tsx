@@ -46,6 +46,7 @@ export interface IColDef {
   header: string | ElementContent;
   accessor?: (data: any) => string;
   render?: (data: any) => React.ReactNode;
+  renderFilter?: (value: any, handleChange: (v: any) => void) => React.ReactNode;
   props?: (data: any) => object;
   headerProps?: object;
   footerProps?: object;

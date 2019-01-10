@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TableProps, IColDef } from ".";
-import { some, debounce } from "lodash";
+import { some } from "lodash";
 
 interface IState {
   filter: any;
@@ -201,7 +201,11 @@ export class TablePlain extends React.Component<TableProps, IState> {
   }
 
   renderFilter(colDef: IColDef, idx: number) {
-    return (
+    return colDef.renderFilter ? (
+      colDef.renderFilter(this.state.filter[colDef.prop], (v: any) =>
+        this.handleFilterChange(colDef, v)
+      )
+    ) : (
       <input
         type="text"
         name={colDef.prop}
@@ -277,11 +281,11 @@ export class TablePlain extends React.Component<TableProps, IState> {
           [name]: value
         }
       }),
-      debounce(() => {
+      () => {
         if (this.props.onChangeFilter) {
           this.props.onChangeFilter(colDef, value);
         }
-      }, 500)
+      }
     );
   };
 
