@@ -78,7 +78,7 @@ describe("column width", () => {
           {
             prop: "b",
             header: "B",
-            width: 4
+            width: 3
           }
         ]}
       />
@@ -86,8 +86,8 @@ describe("column width", () => {
 
     const headerCells = sut.find("th");
 
-    expect(headerCells.first().prop("width")).toBe("20%");
-    expect(headerCells.last().prop("width")).toBe("80%");
+    expect(headerCells.first().prop("width")).toBe("25%");
+    expect(headerCells.last().prop("width")).toBe("75%");
   });
 });
 

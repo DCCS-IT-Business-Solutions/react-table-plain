@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TableProps, IColDef } from ".";
-import { some } from "lodash";
+import { some, sumBy } from "lodash";
 
 interface IState {
   filter: any;
@@ -150,6 +150,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
     const Header: any = this.headerElement;
     const Row: any = this.rowElement;
     const Cell: any = this.cellElement;
+    const totalWidth = sumBy(colDef, x => x.width || 0);
 
     const render =
       this.props.renderHeaderCell != null
@@ -160,11 +161,18 @@ export class TablePlain extends React.Component<TableProps, IState> {
       <Header>
         <Row>
           {this.props.subComponent &&
-            render({ prop: "", header: "" }, -1, {
-              width: "1%",
-              style: { paddingRight: 0 }
-            })}
-          {colDef.map((col: IColDef, idx) => render(col, idx, undefined))}
+            render(
+              { prop: "", header: "" },
+              -1,
+              {
+                width: "1%",
+                style: { paddingRight: 0 }
+              },
+              totalWidth
+            )}
+          {colDef.map((col: IColDef, idx) =>
+            render(col, idx, undefined, totalWidth)
+          )}
         </Row>
         {this.isFilterable && (
           <Row>
@@ -183,7 +191,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
     );
   }
 
-  renderHeaderCell(colDef: IColDef, idx: number, props?: object) {
+  renderHeaderCell(
+    colDef: IColDef,
+    idx: number,
+    props?: object,
+    totalWidth?: number
+  ) {
     const HeaderCell: any = this.headerCellElement;
     return (
       <HeaderCell
@@ -191,7 +204,9 @@ export class TablePlain extends React.Component<TableProps, IState> {
         {...colDef.headerProps}
         onClick={() => colDef.sortable && this.handleChangeSort(colDef)}
         {...props}
-        width={colDef.width ? `${(colDef.width! / 5.0) * 100}%` : undefined}
+        width={
+          colDef.width ? `${(colDef.width! / totalWidth!) * 100}%` : undefined
+        }
       >
         {colDef.header}
         {this.props.orderedBy === colDef &&
