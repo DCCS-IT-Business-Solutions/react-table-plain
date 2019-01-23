@@ -149,7 +149,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
   renderHeader(colDef: IColDef[]) {
     const Header: any = this.headerElement;
     const Row: any = this.rowElement;
-    const Cell: any = this.cellElement;
+    const Cell: any = this.headerCellElement;
     const totalWidth = sumBy(colDef, x => x.width || 0);
 
     const render =
@@ -157,25 +157,31 @@ export class TablePlain extends React.Component<TableProps, IState> {
         ? this.props.renderHeaderCell.bind(this)
         : this.renderHeaderCell.bind(this);
 
+    function renderSubComponentSpacer(subComponent?: React.ReactNode) {
+      return subComponent != null
+        ? render(
+            { prop: "", header: "" },
+            -1,
+            {
+              width: "1%",
+              style: { paddingRight: 0 }
+            },
+            totalWidth
+          )
+        : null;
+    }
+
     return (
       <Header>
         <Row>
-          {this.props.subComponent &&
-            render(
-              { prop: "", header: "" },
-              -1,
-              {
-                width: "1%",
-                style: { paddingRight: 0 }
-              },
-              totalWidth
-            )}
+          {renderSubComponentSpacer(this.props.subComponent)}
           {colDef.map((col: IColDef, idx) =>
             render(col, idx, undefined, totalWidth)
           )}
         </Row>
         {this.isFilterable && (
           <Row>
+            {renderSubComponentSpacer(this.props.subComponent)}
             {colDef.map((def, idx) => (
               <Cell key={idx}>
                 {def.filterable

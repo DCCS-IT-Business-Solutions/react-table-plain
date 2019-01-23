@@ -163,4 +163,28 @@ describe("filter", () => {
     expect(handleChangeFilter).toBeCalled();
     expect(handleChangeFilter.mock.calls[0][1]).toEqual(optionToSelect);
   });
+
+  it("should move filter one column if subComponent is enabled", () => {
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        desc={false}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            filterable: true
+          }
+        ]}
+        subComponent={() => <span>Dummy</span>}
+      />
+    );
+
+    const rows = sut.find("thead > tr");
+    const filterCells = rows.last().find("th");
+
+    expect(rows.length).toBe(2);
+    expect(filterCells.length).toBe(2);
+    expect(filterCells.last().find("input[type='text']").length).toBe(1);
+  });
 });

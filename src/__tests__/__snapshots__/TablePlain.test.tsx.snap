@@ -48,13 +48,13 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                undefined,
+                null,
                 Array [],
               ],
             },
             "ref": null,
             "rendered": Array [
-              undefined,
+              null,
             ],
             "type": "tr",
           },
@@ -111,13 +111,13 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  undefined,
+                  null,
                   Array [],
                 ],
               },
               "ref": null,
               "rendered": Array [
-                undefined,
+                null,
               ],
               "type": "tr",
             },
