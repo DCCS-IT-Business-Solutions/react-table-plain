@@ -6,6 +6,7 @@ export interface ITablePlugin {
 
 type Fn = (colDef: IColDef, data: any) => React.ReactNode;
 type ElementContent = string | Fn;
+export type ChangeFilterHandler = (colDef: IColDef, value: any) => void;
 
 interface ITableElements {
   rootElement?: React.ReactNode;
@@ -25,7 +26,7 @@ export interface IProps {
   desc: boolean;
   plugins?: ITablePlugin[];
   onChangeOrderBy?: (colDef: IColDef) => void;
-  onChangeFilter?: (colDef: IColDef, value: any) => void;
+  onChangeFilter?: ChangeFilterHandler;
   onRowClick?: (data: any) => void;
   renderHeaderCell?: (col: IColDef, idx: number) => React.ReactNode;
   renderFooterCell?: (
@@ -37,6 +38,7 @@ export interface IProps {
   renderExpansionIndicator?: (expanded: boolean) => React.ReactNode;
   subComponent?: (data: any) => React.ReactNode;
   rowProps?: (data: any) => object;
+  filter?: object;
 }
 
 export type TableProps = IProps & ITableElements;

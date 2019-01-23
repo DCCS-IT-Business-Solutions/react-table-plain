@@ -1,6 +1,7 @@
 import * as React from "react";
 import { shallow, mount } from "enzyme";
 import { TablePlain } from "../TablePlain";
+import { IColDef } from "..";
 
 it("should render", () => {
   const sut = shallow(<TablePlain data={[]} desc={false} />);
@@ -186,5 +187,88 @@ describe("filter", () => {
     expect(rows.length).toBe(2);
     expect(filterCells.length).toBe(2);
     expect(filterCells.last().find("input[type='text']").length).toBe(1);
+  });
+
+  describe("filter property", () => {
+    it("should init filter input with provided value", () => {
+      const filter = { a: "test" };
+      const sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          desc={false}
+          filter={filter}
+          colDef={[
+            {
+              prop: "a",
+              header: "A",
+              filterable: true
+            }
+          ]}
+        />
+      );
+
+      const inputs = sut.find("input[name='a']");
+
+      expect(inputs.length).toBe(1);
+      expect(inputs.first().props().value).toBe(filter.a);
+    });
+
+    it("should call onChangeFilter if any filter changed", () => {
+      const filter = { a: "test" };
+      const handleChangeFilter = jest.fn();
+      const sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          desc={false}
+          filter={filter}
+          onChangeFilter={handleChangeFilter}
+          colDef={[
+            {
+              prop: "a",
+              header: "A",
+              filterable: true
+            }
+          ]}
+        />
+      );
+
+      const input = sut.find("input[name='a']");
+      input.simulate("change", { target: { value: "changed" } });
+
+      expect(handleChangeFilter).toBeCalled();
+    });
+
+    it("should should reflect changes to filter", () => {
+      const filter = { a: "test" };
+      const handleChangeFilter = (x: IColDef, v: any) => (filter[x.prop] = v);
+      const sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          desc={false}
+          filter={filter}
+          onChangeFilter={handleChangeFilter}
+          colDef={[
+            {
+              prop: "a",
+              header: "A",
+              filterable: true
+            }
+          ]}
+        />
+      );
+
+      const input = sut.find("input[name='a']");
+      expect(input.props().value).toBe(filter.a);
+
+      // Change filter
+      input.simulate("change", { target: { value: "changed" } });
+
+      expect(filter.a).toBe("changed");
+
+      // Simulte prop change
+      sut.setProps({ filter: { a: "changed" } });
+
+      expect(input.props().value).toBe("changed");
+    });
   });
 });

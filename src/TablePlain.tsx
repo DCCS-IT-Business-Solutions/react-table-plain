@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TableProps, IColDef } from ".";
+import { TableProps, IColDef, ChangeFilterHandler } from ".";
 import { some, sumBy } from "lodash";
 
 interface IState {
@@ -41,6 +41,10 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   get isFilterable() {
     return some(this.props.colDef, def => def.filterable === true);
+  }
+
+  get filter() {
+    return this.props.filter ? this.props.filter : this.state.filter;
   }
 
   componentWillMount() {
@@ -224,14 +228,14 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   renderFilter(colDef: IColDef, idx: number) {
     return colDef.renderFilter ? (
-      colDef.renderFilter(this.state.filter[colDef.prop], (v: any) =>
+      colDef.renderFilter(this.filter[colDef.prop], (v: any) =>
         this.handleFilterChange(colDef, v)
       )
     ) : (
       <input
         type="text"
         name={colDef.prop}
-        value={this.state.filter[colDef.prop] || ""}
+        value={this.filter[colDef.prop] || ""}
         onChange={e => this.handleFilterChange(colDef, e.target.value)}
       />
     );
@@ -296,19 +300,24 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   handleFilterChange = (colDef: IColDef, value: any) => {
     const name = colDef.prop;
-    this.setState(
-      p => ({
-        filter: {
-          ...p.filter,
-          [name]: value
-        }
-      }),
-      () => {
-        if (this.props.onChangeFilter) {
-          this.props.onChangeFilter(colDef, value);
-        }
+    function callHandler(fn?: ChangeFilterHandler) {
+      if (fn != null) {
+        fn(colDef, value);
       }
-    );
+    }
+    if (this.props.filter != null) {
+      callHandler(this.props.onChangeFilter);
+    } else {
+      this.setState(
+        p => ({
+          filter: {
+            ...p.filter,
+            [name]: value
+          }
+        }),
+        () => callHandler(this.props.onChangeFilter)
+      );
+    }
   };
 
   handleExpansionClick = (e: React.MouseEvent, key: number) => {
