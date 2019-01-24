@@ -216,6 +216,40 @@ colDef={[
 
 The `handleChange` callback enables the table to collect all filter values and provide them to you.
 
+#### Handling Filter State
+
+By default the filter state is handled by `react-table-plain`. If you like to preset filter values or have control over the filter as a whole you can provide a `filter` property of type `object`.
+Now it is your responsipility to update the `filter` property according to the changes delivered by the `onChangeFilter` callback. If you don't update the `filter` no updates will be seen in the view.
+
+```javascript
+state = {
+  filter: {}
+}
+
+render() {
+  return <TablePlain
+    colDef={[{
+      prop: "name",
+      header: "Full name",
+      filterable: true
+    }]}
+    filter={this.state.filter}
+    onChangeFilter={this.handleFilterChange}
+    />;
+}
+
+handleFilterChange = (col, val) => {
+  this.setState(p => ({
+    filter: {
+      {...p.filter},
+      [col.prop]: val
+    }
+  }))
+}
+```
+
+[![Edit react-table-plain external filter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/92z0klrvmp)
+
 ### Subcomponent
 
 TODO
