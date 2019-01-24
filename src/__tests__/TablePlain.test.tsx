@@ -257,16 +257,12 @@ describe("filter", () => {
         />
       );
 
-      const input = sut.find("input[name='a']");
+      let input = sut.find("input[name='a']");
       expect(input.props().value).toBe(filter.a);
-
-      // Change filter
-      input.simulate("change", { target: { value: "changed" } });
-
-      expect(filter.a).toBe("changed");
 
       // Simulte prop change
       sut.setProps({ filter: { a: "changed" } });
+      input = sut.find("input[name='a']");
 
       expect(input.props().value).toBe("changed");
     });
