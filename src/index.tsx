@@ -58,6 +58,7 @@ export interface IColDef {
   footerProps?: object;
   sortable?: boolean;
   filterable?: boolean;
+  align?: "left" | "center" | "right";
   footer?: string | ElementContent;
 }
 

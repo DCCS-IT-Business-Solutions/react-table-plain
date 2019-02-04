@@ -132,8 +132,10 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   renderCell(colDef: IColDef, data: any, idx: number, props?: object) {
     const Cell: any = this.cellElement;
-    const ps =
-      colDef.props != null ? { ...props, ...colDef.props(data) } : props;
+    const ps = {
+      ...(colDef.props != null ? { ...props, ...colDef.props(data) } : props),
+      ...this.alignToCss(colDef.align)
+    };
     if (colDef.render != null) {
       return (
         <Cell key={idx} {...ps}>
@@ -208,12 +210,13 @@ export class TablePlain extends React.Component<TableProps, IState> {
     totalWidth?: number
   ) {
     const HeaderCell: any = this.headerCellElement;
+    const ps = { ...props, ...this.alignToCss(colDef.align) };
     return (
       <HeaderCell
         key={idx}
         {...colDef.headerProps}
         onClick={() => colDef.sortable && this.handleChangeSort(colDef)}
-        {...props}
+        {...ps}
         width={
           colDef.width ? `${(colDef.width! / totalWidth!) * 100}%` : undefined
         }
@@ -333,4 +336,8 @@ export class TablePlain extends React.Component<TableProps, IState> {
       }
     }));
   };
+
+  private alignToCss(align?: "left" | "center" | "right") {
+    return align != null ? { style: { "text-align": align } } : undefined;
+  }
 }
