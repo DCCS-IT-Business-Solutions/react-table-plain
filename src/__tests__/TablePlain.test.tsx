@@ -270,12 +270,13 @@ describe("filter", () => {
 
   describe("align", () => {
     let sut = null;
+    const alignment = "center";
     beforeEach(() => {
       sut = mount(
         <TablePlain
           data={[{ a: 1, b: 2 }]}
           desc={false}
-          colDef={[{ prop: "a", header: "A", align: "center" }]}
+          colDef={[{ prop: "a", header: "A", align: alignment, footer: "" }]}
         />
       );
     });
@@ -283,13 +284,19 @@ describe("filter", () => {
     it("should align cell content", () => {
       const style = sut.find("tbody > tr > td").props().style;
       expect(style).toHaveProperty("text-align");
-      expect(style["text-align"]).toBe("center");
+      expect(style["text-align"]).toBe(alignment);
     });
 
     it("should align header content", () => {
       const style = sut.find("thead > tr > th").props().style;
       expect(style).toHaveProperty("text-align");
-      expect(style["text-align"]).toBe("center");
+      expect(style["text-align"]).toBe(alignment);
+    });
+
+    it("should align footer content", () => {
+      const style = sut.find("tfoot > tr > td").props().style;
+      expect(style).toHaveProperty("text-align");
+      expect(style["text-align"]).toBe(alignment);
     });
   });
 });

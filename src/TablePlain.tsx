@@ -262,8 +262,9 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   renderFooterCell(colDef: IColDef, data: any[], idx: number) {
     const FooterCell: any = this.cellElement;
+    const ps = this.alignToCss(colDef.align);
     return (
-      <FooterCell key={idx} {...colDef.footerProps}>
+      <FooterCell key={idx} {...colDef.footerProps} {...ps}>
         {colDef.footer != null
           ? typeof colDef.footer === "string"
             ? colDef.footer
