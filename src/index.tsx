@@ -38,6 +38,7 @@ export interface IProps {
   renderExpansionIndicator?: (expanded: boolean) => React.ReactNode;
   subComponent?: (data: any) => React.ReactNode;
   rowProps?: (data: any) => object;
+  cellProps?: (data: any) => object;
   filter?: object;
 }
 

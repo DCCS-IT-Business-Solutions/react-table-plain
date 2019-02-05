@@ -296,4 +296,19 @@ describe("filter", () => {
       expect(style.textAlign).toBe(alignment);
     });
   });
+
+  describe("cellProps", () => {
+    it("should apply properties to all tbody cells", () => {
+      const sut = mount(
+        <TablePlain
+          cellProps={data => ({ "data-test": data.a })}
+          data={[{ a: 1, b: 2 }]}
+          desc={false}
+          colDef={[{ prop: "a", header: "A" }]}
+        />
+      );
+
+      expect(sut.find("tbody > tr > td").props()).toHaveProperty("data-test");
+    });
+  });
 });

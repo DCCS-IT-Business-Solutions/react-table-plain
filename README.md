@@ -250,6 +250,33 @@ handleFilterChange = (col, val) => {
 
 [![Edit react-table-plain external filter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/92z0klrvmp)
 
+### Cell properties for all cells
+
+To set the props of all body cells you can use the `cellProps` property of the table like this:
+
+```javascript
+<TablePlain
+  cellProps={data => ({
+    style: {
+      whiteSpace: "nowrap",
+      width: "100%",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
+    }
+  })}
+  // ...
+/>
+```
+
+### Content styling
+
+#### Alignment
+
+You can always set cell properties with `props: () => ({style: {textAlign: "right"}})` to achive alignment of the cell content.
+To make things easier we introduced the `align` property, that aligns header, body and footer cell content.
+
+[![Edit react-table-plain align](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/oxnvn95lz)
+
 ### Subcomponent
 
 TODO

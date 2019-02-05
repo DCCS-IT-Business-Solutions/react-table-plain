@@ -133,8 +133,15 @@ export class TablePlain extends React.Component<TableProps, IState> {
   renderCell(colDef: IColDef, data: any, idx: number, props?: object) {
     const Cell: any = this.cellElement;
     const ps = {
-      ...(colDef.props != null ? { ...props, ...colDef.props(data) } : props),
-      ...this.alignToCss(colDef.align)
+      // IMPORTANT: The order of the following lines matters:
+      // generated style props for alignment
+      ...this.alignToCss(colDef.align),
+      // table-wide cell props.
+      ...(this.props.cellProps != null
+        ? this.props.cellProps(data)
+        : undefined),
+      // specific cell props
+      ...(colDef.props != null ? { ...props, ...colDef.props(data) } : props)
     };
     if (colDef.render != null) {
       return (
