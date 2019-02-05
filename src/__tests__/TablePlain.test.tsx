@@ -283,20 +283,17 @@ describe("filter", () => {
 
     it("should align cell content", () => {
       const style = sut.find("tbody > tr > td").props().style;
-      expect(style).toHaveProperty("text-align");
-      expect(style["text-align"]).toBe(alignment);
+      expect(style.textAlign).toBe(alignment);
     });
 
     it("should align header content", () => {
       const style = sut.find("thead > tr > th").props().style;
-      expect(style).toHaveProperty("text-align");
-      expect(style["text-align"]).toBe(alignment);
+      expect(style.textAlign).toBe(alignment);
     });
 
     it("should align footer content", () => {
       const style = sut.find("tfoot > tr > td").props().style;
-      expect(style).toHaveProperty("text-align");
-      expect(style["text-align"]).toBe(alignment);
+      expect(style.textAlign).toBe(alignment);
     });
   });
 });

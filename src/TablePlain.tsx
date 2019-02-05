@@ -339,6 +339,6 @@ export class TablePlain extends React.Component<TableProps, IState> {
   };
 
   private alignToCss(align?: "left" | "center" | "right") {
-    return align != null ? { style: { "text-align": align } } : undefined;
+    return align != null ? { style: { textAlign: align } } : undefined;
   }
 }
