@@ -40,6 +40,9 @@ ShallowWrapper {
         <tbody />,
         false,
       ],
+      "stlye": Object {
+        "tableLayout": "fixed",
+      },
     },
     "ref": null,
     "rendered": Array [
@@ -103,6 +106,9 @@ ShallowWrapper {
           <tbody />,
           false,
         ],
+        "stlye": Object {
+          "tableLayout": "fixed",
+        },
       },
       "ref": null,
       "rendered": Array [
