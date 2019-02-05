@@ -40,7 +40,7 @@ ShallowWrapper {
         <tbody />,
         false,
       ],
-      "stlye": Object {
+      "style": Object {
         "tableLayout": "fixed",
       },
     },
@@ -106,7 +106,7 @@ ShallowWrapper {
           <tbody />,
           false,
         ],
-        "stlye": Object {
+        "style": Object {
           "tableLayout": "fixed",
         },
       },

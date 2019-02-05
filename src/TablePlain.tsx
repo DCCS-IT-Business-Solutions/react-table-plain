@@ -62,7 +62,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
     if (data != null) {
       const Root: any = this.rootElement;
       return (
-        <Root stlye={{ tableLayout: "fixed" }}>
+        <Root style={{ tableLayout: "fixed" }}>
           {this.renderHeader(colDef)}
           {this.renderData(colDef, data)}
           {this.hasFooter && this.renderFooter(colDef, data)}
