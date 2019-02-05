@@ -277,6 +277,12 @@ To make things easier we introduced the `align` property, that aligns header, bo
 
 [![Edit react-table-plain align](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/oxnvn95lz)
 
+#### Ellipsis
+
+This setting applies to all body cells.
+
+[![Edit react-table-plain table-wide cell props](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/v32l3qo010)
+
 ### Subcomponent
 
 TODO
