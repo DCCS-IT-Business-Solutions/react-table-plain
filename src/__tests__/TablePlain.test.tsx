@@ -268,32 +268,49 @@ describe("filter", () => {
     });
   });
 
-  describe("align", () => {
-    let sut = null;
-    const alignment = "center";
-    beforeEach(() => {
-      sut = mount(
-        <TablePlain
-          data={[{ a: 1, b: 2 }]}
-          desc={false}
-          colDef={[{ prop: "a", header: "A", align: alignment, footer: "" }]}
-        />
-      );
+  describe("cell styling", () => {
+    describe("align", () => {
+      let sut = null;
+      const alignment = "center";
+      beforeEach(() => {
+        sut = mount(
+          <TablePlain
+            data={[{ a: 1, b: 2 }]}
+            desc={false}
+            colDef={[{ prop: "a", header: "A", align: alignment, footer: "" }]}
+          />
+        );
+      });
+
+      it("should align cell content", () => {
+        const style = sut.find("tbody > tr > td").props().style;
+        expect(style.textAlign).toBe(alignment);
+      });
+
+      it("should align header content", () => {
+        const style = sut.find("thead > tr > th").props().style;
+        expect(style.textAlign).toBe(alignment);
+      });
+
+      it("should align footer content", () => {
+        const style = sut.find("tfoot > tr > td").props().style;
+        expect(style.textAlign).toBe(alignment);
+      });
     });
 
-    it("should align cell content", () => {
-      const style = sut.find("tbody > tr > td").props().style;
-      expect(style.textAlign).toBe(alignment);
-    });
+    describe("ellipsis", () => {
+      it("should apply to all body cells", () => {
+        const sut = mount(
+          <TablePlain
+            data={[{ a: 1, b: 2 }]}
+            desc={false}
+            colDef={[{ prop: "a", header: "A" }]}
+            ellipsis={true}
+          />
+        );
 
-    it("should align header content", () => {
-      const style = sut.find("thead > tr > th").props().style;
-      expect(style.textAlign).toBe(alignment);
-    });
-
-    it("should align footer content", () => {
-      const style = sut.find("tfoot > tr > td").props().style;
-      expect(style.textAlign).toBe(alignment);
+        expect(sut.find("tbody > tr > td").props()).toMatchSnapshot();
+      });
     });
   });
 

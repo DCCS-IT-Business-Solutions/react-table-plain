@@ -134,6 +134,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
     const Cell: any = this.cellElement;
     const ps = {
       // IMPORTANT: The order of the following lines matters:
+      ...this.ellipsisToCss(this.props.ellipsis),
       // generated style props for alignment
       ...this.alignToCss(colDef.align),
       // table-wide cell props.
@@ -347,5 +348,19 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   private alignToCss(align?: "left" | "center" | "right") {
     return align != null ? { style: { textAlign: align } } : undefined;
+  }
+
+  private ellipsisToCss(ellipsis?: boolean) {
+    return ellipsis === true
+      ? {
+          style: {
+            whiteSpace: "nowrap",
+            width: "100%",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: "auto"
+          }
+        }
+      : undefined;
   }
 }

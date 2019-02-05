@@ -40,6 +40,7 @@ export interface IProps {
   rowProps?: (data: any) => object;
   cellProps?: (data: any) => object;
   filter?: object;
+  ellipsis?: boolean;
 }
 
 export type TableProps = IProps & ITableElements;

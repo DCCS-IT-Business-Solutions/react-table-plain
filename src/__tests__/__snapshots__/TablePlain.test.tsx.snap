@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`filter cell styling ellipsis should apply to all body cells 1`] = `
+Object {
+  "children": 1,
+  "style": Object {
+    "maxWidth": "auto",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "whiteSpace": "nowrap",
+    "width": "100%",
+  },
+}
+`;
+
 exports[`should render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
