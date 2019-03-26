@@ -14,9 +14,7 @@ You should install [react-table-plain with npm or yarn](https://www.npmjs.com/pa
 
 This command will download and install react-table-plain and all required dependencies.
 
-## Features
-
-### Minimal version
+## Minimal version
 
 ```javascript
 import React from "react";
@@ -47,6 +45,39 @@ function App() {
 ```
 
 [![Edit react-table-plain mini](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/1o5m67xz5j)
+
+## Properties
+
+| Property                  | Type                                                         | Optional | Description                                                 |
+| ------------------------- | ------------------------------------------------------------ | -------- | ----------------------------------------------------------- |
+| rootElement               | React.ReactNode                                              | x        | Normaly &lt;table&gt;                                       |
+| rowElement                | React.ReactNode                                              | x        | Normaly &lt;tr&gt;                                          |
+| cellElement               | React.ReactNode                                              | x        | Normaly &lt;td&gt;                                          |
+| headerCellElement         | React.ReactNode                                              | x        | Normaly &lt;th&gt;                                          |
+| headerElement             | React.ReactNode                                              | x        | Normaly &lt;thead&gt;                                       |
+| bodyElement               | React.ReactNode                                              | x        | Normaly &lt;tbody&gt;                                       |
+| footerElement?            | React.ReactNode                                              | x        | Normaly &lt;tfooter&gt;                                     |
+| renderSortLabel?          | colDef: IColDef, desc: boolean) => React.ReactNode           | x        | Render the sort label (arrow down/up) in header             |
+| data                      | any[]                                                        |          | Data array to render                                        |
+| colDef?                   | IColDef[]                                                    | x        | Definitions for all columns                                 |
+| orderedBy?                | IColDef                                                      | x        |
+| desc                      | boolean                                                      |          |
+| onChangeOrderBy?          | colDef: IColDef) => void                                     | x        | Called, when sorting changed                                |
+| onChangeFilter?           | ChangeFilterHandler                                          | x        | Called, when filter changed                                 |
+| onRowClick?               | data: any) => void                                           | x        | Called, when one row has bee clicked                        |
+| renderRoot?               | children: React.ReactNode) => React.ReactNode                | x        | Returns root element to render                              |
+| renderHeaderCell?         | col: IColDef, idx: number) => React.ReactNode                | x        | Returns header element to render                            |
+| renderFooterCell?         | ( col: IColDef, data: any[], idx: number) => React.ReactNode | x        | Returns footer element to render                            |
+| renderFilter?             | (col: IColDef, idx: number) => React.ReactNode               | x        | Returns the filter for a column                             |
+| renderExpansionIndicator? | (expanded: boolean) => React.ReactNode                       | x        | Returns the expanstion indicator to toggle a sub-component. |
+| subComponent?             | (data: any) => React.ReactNode                               | x        | Returns the subcomponent for a row.                         |
+| rowProps?                 | (data: any) => object                                        | x        | Callback that returns the props for a row.                  |
+| cellProps?                | (data: any) => object                                        | x        | Callback that returns the props for a cell.                 |
+| filter?                   | object                                                       | x        | Current filter object.                                      |
+| defaultFilter?            | object                                                       | x        | One time filter object.                                     |
+| ellipsis?                 | boolean                                                      | x        | Use text ellipsis to shorten lengthy text content?          |
+
+## Features
 
 ### Sorting
 
