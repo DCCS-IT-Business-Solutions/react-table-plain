@@ -1,9 +1,5 @@
 import * as React from "react";
 
-export interface ITablePlugin {
-  init: (colDef: IColDef[]) => void;
-}
-
 type Fn = (colDef: IColDef, data: any) => React.ReactNode;
 type ElementContent = string | Fn;
 export type ChangeFilterHandler = (colDef: IColDef, value: any) => void;
@@ -24,10 +20,10 @@ export interface IProps {
   colDef?: IColDef[];
   orderedBy?: IColDef;
   desc: boolean;
-  plugins?: ITablePlugin[];
   onChangeOrderBy?: (colDef: IColDef) => void;
   onChangeFilter?: ChangeFilterHandler;
   onRowClick?: (data: any) => void;
+  renderRoot?: (children: React.ReactNode) => React.ReactNode;
   renderHeaderCell?: (col: IColDef, idx: number) => React.ReactNode;
   renderFooterCell?: (
     col: IColDef,
@@ -40,6 +36,7 @@ export interface IProps {
   rowProps?: (data: any) => object;
   cellProps?: (data: any) => object;
   filter?: object;
+  defaultFilter?: object;
   ellipsis?: boolean;
 }
 

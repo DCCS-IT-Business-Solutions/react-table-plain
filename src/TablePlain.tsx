@@ -9,7 +9,7 @@ interface IState {
 
 export class TablePlain extends React.Component<TableProps, IState> {
   state = {
-    filter: {},
+    filter: this.props.defaultFilter || {},
     showSubComponent: {}
   };
 
@@ -47,30 +47,27 @@ export class TablePlain extends React.Component<TableProps, IState> {
     return this.props.filter ? this.props.filter : this.state.filter;
   }
 
-  componentWillMount() {
-    for (const plugin of this.props.plugins || []) {
-      if (plugin != null) {
-        plugin.init(this.props.colDef!);
-      }
-    }
-  }
-
   render() {
     const { data } = this.props;
     const colDef = this.props.colDef || this.generateColDef(data);
 
     if (data != null) {
-      const Root: any = this.rootElement;
-      return (
-        <Root style={{ tableLayout: "fixed" }}>
+      const renderRoot = this.props.renderRoot || this.renderRoot;
+      return renderRoot(
+        <React.Fragment>
           {this.renderHeader(colDef)}
           {this.renderData(colDef, data)}
           {this.hasFooter && this.renderFooter(colDef, data)}
-        </Root>
+        </React.Fragment>
       );
     }
     return null;
   }
+
+  renderRoot = (children: React.ReactNode) => {
+    const Root: any = this.rootElement;
+    return <Root style={{ tableLayout: "fixed" }}>{children}</Root>;
+  };
 
   renderData(colDef: IColDef[], data: any[]) {
     const Body: any = this.bodyElement;

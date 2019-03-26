@@ -33,71 +33,21 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
+      "children": <React.Fragment>
         <thead>
           <tr />
-        </thead>,
-        <tbody />,
-        false,
-      ],
+        </thead>
+        <tbody />
+      </React.Fragment>,
       "style": Object {
         "tableLayout": "fixed",
       },
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <tr />,
-            false,
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                null,
-                Array [],
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              null,
-            ],
-            "type": "tr",
-          },
-          false,
-        ],
-        "type": "thead",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [],
-        },
-        "ref": null,
-        "rendered": Array [],
-        "type": "tbody",
-      },
-      false,
-    ],
-    "type": "table",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           <thead>
@@ -106,9 +56,6 @@ ShallowWrapper {
           <tbody />,
           false,
         ],
-        "style": Object {
-          "tableLayout": "fixed",
-        },
       },
       "ref": null,
       "rendered": Array [
@@ -157,6 +104,89 @@ ShallowWrapper {
         },
         false,
       ],
+      "type": Symbol(react.fragment),
+    },
+    "type": "table",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <React.Fragment>
+          <thead>
+            <tr />
+          </thead>
+          <tbody />
+        </React.Fragment>,
+        "style": Object {
+          "tableLayout": "fixed",
+        },
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <thead>
+              <tr />
+            </thead>,
+            <tbody />,
+            false,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <tr />,
+                false,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    null,
+                    Array [],
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  null,
+                ],
+                "type": "tr",
+              },
+              false,
+            ],
+            "type": "thead",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [],
+            },
+            "ref": null,
+            "rendered": Array [],
+            "type": "tbody",
+          },
+          false,
+        ],
+        "type": Symbol(react.fragment),
+      },
       "type": "table",
     },
   ],

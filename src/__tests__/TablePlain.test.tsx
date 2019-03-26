@@ -43,6 +43,18 @@ it("should set row props", () => {
   expect(row.props()).toHaveProperty("style.background");
 });
 
+it("should call renderRoot if provided", () => {
+  const sut = shallow(
+    <TablePlain
+      data={[]}
+      desc={false}
+      renderRoot={children => <div className="table">{children}</div>}
+    />
+  );
+
+  expect(sut.find(".table").length).toBe(1);
+});
+
 describe("subComponent", () => {
   it("should not call onRowClick when clicked", () => {
     const handleRowClick = jest.fn();
