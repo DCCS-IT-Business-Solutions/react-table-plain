@@ -435,14 +435,14 @@ describe("single row selection", () => {
         .find("tbody tr")
         .at(1)
         .props().style
-    ).toEqual({ background: "grey" });
+    ).toEqual({ background: "grey",cursor:"default" });
 
     expect(
       sut
         .find("tbody tr")
         .at(0)
         .props().style
-    ).not.toEqual({ background: "grey" });
+    ).not.toEqual({ background: "grey" ,cursor:"default"});
   });
 
   it("should compare the whole object because no ColumName is provided", () => {
@@ -636,21 +636,21 @@ describe("multi row selection", () => {
         .find("tbody tr")
         .at(1)
         .props().style
-    ).toEqual({ background: "grey" });
+    ).toEqual({ background: "grey", cursor:"default" });
 
     expect(
       sut
         .find("tbody tr")
         .at(0)
         .props().style
-    ).toEqual({ background: "grey" });
+    ).toEqual({ background: "grey",cursor:"default" });
 
     expect(
       sut
         .find("tbody tr")
         .at(2)
         .props().style
-    ).not.toEqual({ background: "grey" });
+    ).not.toEqual({ background: "grey",cursor:"default" });
   });
 
   it("should compare the whole object because no ColumName is provided", () => {
