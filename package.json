@@ -9,7 +9,7 @@
     "transpile": "tsc",
     "lint": "tslint ./src/**/*.ts*",
     "test": "jest --runInBand --coverage",
-    "test:watch": "jest --runInBand --coverage --watch"
+    "test:watch": "jest --runInBand --watch"
   },
   "repository": {
     "type": "git",
