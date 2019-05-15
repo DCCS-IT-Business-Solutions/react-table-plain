@@ -78,12 +78,103 @@ export class TablePlain extends React.Component<TableProps, IState> {
     );
   }
 
+  getSelectedRowProps(data: any) {
+    if (this.props.selectedRow == null) {
+      // No Row is selected
+      return false;
+    }
+    if (this.props.rowSelectionColumnName != null) {
+      // The user has provided a ColumnName to compare a single Column with the SelectedRow Value
+      if (Array.isArray(this.props.selectedRow)) {
+        // This is a multi-line selectable table
+        if (
+          this.props.selectedRow.includes(
+            data[this.props.rowSelectionColumnName]
+          )
+        ) {
+          // This row is in scope of the selectedRow Array
+          if (this.props.selectedRowProps != null) {
+            // The user has provided a function that provides a object for the row
+            return this.props.selectedRowProps(data);
+          } else {
+            // The user has not provided a function that provides a object for the row,
+            // so default the background is set to grey
+            return { style: { background: "grey",cursor: this.props.onRowClick ? "pointer" : "default" } };
+          }
+        } else {
+          // This row is not in scope of the selectedRow Array
+          return false;
+        }
+      } else {
+        // This is a single-line selectable table
+        if (
+          this.props.selectedRow === data[this.props.rowSelectionColumnName]
+        ) {
+          // This row is the selectedRow
+          if (this.props.selectedRowProps != null) {
+            // The user has provided a function that provides a object for the row
+            return this.props.selectedRowProps(data);
+          } else {
+            // The user has not provided a function that provides a object for the row,
+            // so default the background is set to grey
+            return { style: { background: "grey",cursor: this.props.onRowClick ? "pointer" : "default" } };
+          }
+        } else {
+          // This row is not the selected Row
+          return false;
+        }
+      }
+    } else {
+      // The user has not provided a ColumnName to compare a single Column with the SelectedRow Value
+      // so default the selectedRow is compared with the whole data object
+      if (Array.isArray(this.props.selectedRow)) {
+        // This is a multi-line selectable table
+        if (this.props.selectedRow.includes(data)) {
+          // This row is in scope of the selectedRow Array
+          if (this.props.selectedRowProps != null) {
+            // The user has provided a function that provides a object for the row
+            return this.props.selectedRowProps(data);
+          } else {
+            // The user has not provided a function that provides a object for the row,
+            // so default the background is set to grey
+            return { style: { background: "grey",cursor: this.props.onRowClick ? "pointer" : "default" } };
+          }
+        } else {
+          // This row is not in scope of the selectedRow Array
+          return false;
+        }
+      } else {
+        // This is a single-line selectable table
+        if (this.props.selectedRow === data) {
+          // This row is the selectedRow
+          if (this.props.selectedRowProps != null) {
+            // The user has provided a function that provides a object for the row
+            return this.props.selectedRowProps(data);
+          } else {
+            // The user has not provided a function that provides a object for the row,
+            // so default the background is set to grey
+            return { style: { background: "grey",cursor: this.props.onRowClick ? "pointer" : "default" } };
+          }
+        } else {
+          // This row is not the selected Row
+          return false;
+        }
+      }
+    }
+  }
+
+  onClickCalls(data: any) {
+    if(this.props.onRowClick){  this.props.onRowClick(data);}
+    if(this.props.onChangeSelectedRow){this.props.onChangeSelectedRow(data);}
+  }
+
   renderRow(colDef: IColDef[], data: any, key: number) {
     const Row: any = this.rowElement;
     const Cell: any = this.cellElement;
     const renderIndicator =
       this.props.renderExpansionIndicator || this.renderExpansionIndicator;
     const props = this.props.rowProps != null && this.props.rowProps(data);
+    const selectedRowProps = this.getSelectedRowProps(data);
     const result = [
       <Row
         key={key}
@@ -91,8 +182,9 @@ export class TablePlain extends React.Component<TableProps, IState> {
           background: key % 2 ? "#ebebeb" : "white",
           cursor: this.props.onRowClick ? "pointer" : "default"
         }}
-        onClick={() => this.props.onRowClick && this.props.onRowClick(data)}
+        onClick={() => this.onClickCalls(data)}
         {...props}
+        {...selectedRowProps}
       >
         {this.props.subComponent &&
           this.renderCell(
