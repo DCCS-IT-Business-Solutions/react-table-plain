@@ -48,34 +48,38 @@ function App() {
 
 ## Properties
 
-| Property                  | Type                                                         | Optional | Description                                                 |
-| ------------------------- | ------------------------------------------------------------ | -------- | ----------------------------------------------------------- |
-| rootElement               | React.ReactNode                                              | x        | Normaly &lt;table&gt;                                       |
-| rowElement                | React.ReactNode                                              | x        | Normaly &lt;tr&gt;                                          |
-| cellElement               | React.ReactNode                                              | x        | Normaly &lt;td&gt;                                          |
-| headerCellElement         | React.ReactNode                                              | x        | Normaly &lt;th&gt;                                          |
-| headerElement             | React.ReactNode                                              | x        | Normaly &lt;thead&gt;                                       |
-| bodyElement               | React.ReactNode                                              | x        | Normaly &lt;tbody&gt;                                       |
-| footerElement?            | React.ReactNode                                              | x        | Normaly &lt;tfooter&gt;                                     |
-| renderSortLabel?          | colDef: IColDef, desc: boolean) => React.ReactNode           | x        | Render the sort label (arrow down/up) in header             |
-| data                      | any[]                                                        |          | Data array to render                                        |
-| colDef?                   | IColDef[]                                                    | x        | Definitions for all columns                                 |
+| Property                  | Type                                                         | Optional | Description                                                                                                                                                |
+| ------------------------- | ------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| rootElement               | React.ReactNode                                              | x        | Normaly &lt;table&gt;                                                                                                                                      |
+| rowElement                | React.ReactNode                                              | x        | Normaly &lt;tr&gt;                                                                                                                                         |
+| cellElement               | React.ReactNode                                              | x        | Normaly &lt;td&gt;                                                                                                                                         |
+| headerCellElement         | React.ReactNode                                              | x        | Normaly &lt;th&gt;                                                                                                                                         |
+| headerElement             | React.ReactNode                                              | x        | Normaly &lt;thead&gt;                                                                                                                                      |
+| bodyElement               | React.ReactNode                                              | x        | Normaly &lt;tbody&gt;                                                                                                                                      |
+| footerElement?            | React.ReactNode                                              | x        | Normaly &lt;tfooter&gt;                                                                                                                                    |
+| renderSortLabel?          | colDef: IColDef, desc: boolean) => React.ReactNode           | x        | Render the sort label (arrow down/up) in header                                                                                                            |
+| data                      | any[]                                                        |          | Data array to render                                                                                                                                       |
+| colDef?                   | IColDef[]                                                    | x        | Definitions for all columns                                                                                                                                |
 | orderedBy?                | IColDef                                                      | x        |
 | desc                      | boolean                                                      |          |
-| onChangeOrderBy?          | colDef: IColDef) => void                                     | x        | Called, when sorting changed                                |
-| onChangeFilter?           | ChangeFilterHandler                                          | x        | Called, when filter changed                                 |
-| onRowClick?               | data: any) => void                                           | x        | Called, when one row has bee clicked                        |
-| renderRoot?               | children: React.ReactNode) => React.ReactNode                | x        | Returns root element to render                              |
-| renderHeaderCell?         | col: IColDef, idx: number) => React.ReactNode                | x        | Returns header element to render                            |
-| renderFooterCell?         | ( col: IColDef, data: any[], idx: number) => React.ReactNode | x        | Returns footer element to render                            |
-| renderFilter?             | (col: IColDef, idx: number) => React.ReactNode               | x        | Returns the filter for a column                             |
-| renderExpansionIndicator? | (expanded: boolean) => React.ReactNode                       | x        | Returns the expanstion indicator to toggle a sub-component. |
-| subComponent?             | (data: any) => React.ReactNode                               | x        | Returns the subcomponent for a row.                         |
-| rowProps?                 | (data: any) => object                                        | x        | Callback that returns the props for a row.                  |
-| cellProps?                | (data: any) => object                                        | x        | Callback that returns the props for a cell.                 |
-| filter?                   | object                                                       | x        | Current filter object.                                      |
-| defaultFilter?            | object                                                       | x        | One time filter object.                                     |
-| ellipsis?                 | boolean                                                      | x        | Use text ellipsis to shorten lengthy text content?          |
+| onChangeOrderBy?          | colDef: IColDef) => void                                     | x        | Called, when sorting changed                                                                                                                               |
+| onChangeFilter?           | ChangeFilterHandler                                          | x        | Called, when filter changed                                                                                                                                |
+| onRowClick?               | data: any) => void                                           | x        | Called, when one row has bee clicked                                                                                                                       |
+| renderRoot?               | children: React.ReactNode) => React.ReactNode                | x        | Returns root element to render                                                                                                                             |
+| renderHeaderCell?         | col: IColDef, idx: number) => React.ReactNode                | x        | Returns header element to render                                                                                                                           |
+| renderFooterCell?         | ( col: IColDef, data: any[], idx: number) => React.ReactNode | x        | Returns footer element to render                                                                                                                           |
+| renderFilter?             | (col: IColDef, idx: number) => React.ReactNode               | x        | Returns the filter for a column                                                                                                                            |
+| renderExpansionIndicator? | (expanded: boolean) => React.ReactNode                       | x        | Returns the expanstion indicator to toggle a sub-component.                                                                                                |
+| subComponent?             | (data: any) => React.ReactNode                               | x        | Returns the subcomponent for a row.                                                                                                                        |
+| rowProps?                 | (data: any) => object                                        | x        | Callback that returns the props for a row.                                                                                                                 |
+| cellProps?                | (data: any) => object                                        | x        | Callback that returns the props for a cell.                                                                                                                |
+| filter?                   | object                                                       | x        | Current filter object.                                                                                                                                     |
+| defaultFilter?            | object                                                       | x        | One time filter object.                                                                                                                                    |
+| ellipsis?                 | boolean                                                      | x        | Use text ellipsis to shorten lengthy text content?                                                                                                         |
+| selectedRow?              | any / any[]                                                  | x        | If any single-line-selection, if any[] multi-line-selection.                                                                                               |
+| onChangeSelectedRow?      | (data:any)=>void                                             | x        | Callback when selection changes.                                                                                                                           |
+| selectedRowProps?         | (data:any)=>object                                           | x        | Gets called if row is in scope of "selectedRow". The return value is set as property in the "tr" tag.                                                      |
+| rowSelectionColumnName    | string                                                       | x        | The name of the property of data that should be checked if it is in "selectedRow" scope. If null/undefined it checks if the whole data object is in scope. |
 
 ## Features
 
@@ -298,6 +302,107 @@ To set the props of all body cells you can use the `cellProps` property of the t
   // ...
 />
 ```
+
+### Row Selection
+
+This table supports two types of selection. <b>Single</b> and <b>Multi</b> Selection
+
+#### Single Row Selection
+
+<b>selectedRow: </b>To use single-row-selection the selectedRow has to bee of type "any". In this case the Id of the selected row.
+
+<b>selectedRowProps: </b>This function is called by every row that is in scope of selectedRow. The function returns a object which is put into "tr" tag of the row. If this function is not provided the background of the Row is set to grey by default.
+
+<b>onChangeSelectedRow: </b>This function is called, when the selection changes (User clicks on row).
+
+<b>rowSelectionColumnName: </b>The name of the property of the data that should be checked if it is in scope of selectedRow. If it is not provided the whole data object is checked if it is in scope.
+
+```javascript
+const data = [
+  { id: 1, name: "Alexa" },
+  { id: 2, name: "Google Home" },
+  { id: 3, name: "Cortana" }
+];
+
+const [selectedRow, setSelectedRow] = React.useState();
+
+function handleSelectionChange(data) {
+  setSelectedRow(data.id);
+}
+
+function selectedRowProps(data) {
+  return { style: { background: "yellow" } };
+}
+
+<TablePlain
+  data={data}
+  colDef={[
+    {
+      prop: "id",
+      header: "ID"
+    },
+    {
+      prop: "name",
+      header: "User name",
+      sortable: true
+    }
+  ]}
+  selectedRow={selectedRow}
+  selectedRowProps={selectedRowProps}
+  onChangeSelectedRow={handleSelectionChange}
+  rowSelectionColumnName="id"
+/>;
+```
+
+[![Edit react-table-plain single-line-selection](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/0y5k9y0pjv?fontsize=14)
+
+#### Multi-Line-Selection
+
+<b>selectedRow: </b>To use multi-row-selection the selectedRow has to bee of type "any[]". In this case the Ids of the selected rows.
+
+<b>selectedRowProps: </b>This function is called by every row that is in scope of selectedRow. The function returns a object which is put into "tr" tag of the row. If this function is not provided the background of the Row is set to grey by default.
+
+<b>onChangeSelectedRow: </b>This function is called, when the selection changes (User clicks on row).
+
+<b>rowSelectionColumnName: </b>The name of the property of the data that should be checked if it is in scope of selectedRow. If it is not provided the whole data object is checked if it is in scope.
+
+```javascript
+const data = [
+  { id: 1, name: "Alexa" },
+  { id: 2, name: "Google Home" },
+  { id: 3, name: "Cortana" }
+];
+
+const [selectedRows, setSelectedRows] = React.useState([]);
+
+function selectedRowProps(data) {
+  return { style: { background: "yellow", cursor: "pointer" } };
+}
+
+function handleSelectionChange(data) {
+  setSelectedRows([...selectedRows, data.id]);
+}
+
+<TablePlain
+  data={data}
+  colDef={[
+    {
+      prop: "id",
+      header: "ID"
+    },
+    {
+      prop: "name",
+      header: "User name",
+      sortable: true
+    }
+  ]}
+  selectedRow={selectedRows}
+  selectedRowProps={selectedRowProps}
+  onChangeSelectedRow={handleSelectionChange}
+  rowSelectionColumnName="id"
+/>;
+```
+[![Edit react-table-plain multi-line-selection](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/oxxw81kmnz?fontsize=14)
 
 ### Content styling
 
