@@ -66,7 +66,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
 
   renderRoot = (children: React.ReactNode) => {
     const Root: any = this.rootElement;
-    return <Root style={{ tableLayout: "fixed" }}>{children}</Root>;
+    return <Root style={{ tableLayout: "auto" }}>{children}</Root>;
   };
 
   renderData(colDef: IColDef[], data: any[]) {
