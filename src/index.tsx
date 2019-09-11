@@ -30,12 +30,12 @@ export interface IRowSelectionProps {
 export type RowSelectionProps = IRowSelectionProps;
 export type SortDirection = "asc" | "desc";
 
-export interface IProps {
+export interface ITablePlainProps {
   data: any[];
   colDef?: IColDef[];
   orderBy?: string;
   sort?: SortDirection;
-  onChangeOrderBy?: (colDef: IColDef) => void;
+  onChangeOrderBy?: (orderBy: string) => void;
   onChangeFilter?: ChangeFilterHandler;
   onRowClick?: (data: any) => void;
   renderRoot?: (children: React.ReactNode) => React.ReactNode;
@@ -59,7 +59,7 @@ export interface IProps {
   rowSelectionColumnName?: string;
 }
 
-export type TableProps = IProps & ITableElements;
+export type TableProps = ITablePlainProps & ITableElements;
 
 export interface IColDef {
   prop: string;
