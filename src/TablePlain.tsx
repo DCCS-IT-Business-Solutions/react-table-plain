@@ -354,14 +354,14 @@ export class TablePlain extends React.Component<TableProps, IState> {
   renderFilter(colDef: IColDef, idx: number) {
     return colDef.renderFilter ? (
       colDef.renderFilter(this.filter[colDef.prop], (v: any) =>
-        this.handleFilterChange(colDef, v)
+        this.handleFilterChange(colDef.prop, v)
       )
     ) : (
       <input
         type="text"
         name={colDef.prop}
         value={this.filter[colDef.prop] || ""}
-        onChange={e => this.handleFilterChange(colDef, e.target.value)}
+        onChange={e => this.handleFilterChange(colDef.prop, e.target.value)}
       />
     );
   }
@@ -424,11 +424,11 @@ export class TablePlain extends React.Component<TableProps, IState> {
     }
   };
 
-  handleFilterChange = (colDef: IColDef, value: any) => {
-    const name = colDef.prop;
+  handleFilterChange = (orderBy: string, value: any) => {
+    const name = orderBy;
     function callHandler(fn?: ChangeFilterHandler) {
       if (fn != null) {
-        fn(colDef, value);
+        fn(orderBy, value);
       }
     }
     if (this.props.filter != null) {
