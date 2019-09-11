@@ -8,7 +8,6 @@ deploy:
   provider: npm
   email: stephan.meissner@dccs.at
   api_key:
-    secure: $NPM_API_KEY 
+    secure: $NPM_API_KEY
   on:
-    tags: true
     repo: DCCS-IT-Business-Solutions/react-table-plain
