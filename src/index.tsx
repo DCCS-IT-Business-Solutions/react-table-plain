@@ -15,25 +15,26 @@ interface ITableElements {
   renderSortLabel?: (colDef: IColDef, desc: boolean) => React.ReactNode;
 }
 
-export enum RowSelectionType{
+export enum RowSelectionType {
   "single-line",
   "multi-line"
 }
 
-export interface IRowSelectionProps{
-  selectedRow?: any|any[];                    // Welche Zeile wird hervorgehoben. Bei einem Array können mehrere Zeilen hervorgehoben werden (optional)
-  onChangeSelectedRow?: (data: any) => void;  // Ausgewählte Zeile wurde verändert.
-  selectedRowProps?: (data: any) => object;   // Wird pro ausgewählter Zeile aufgerufen. Ergebnis wird den Props der <tr> hinzugefügt.
-  columnName: string;                         // Mit welchem Column selectedRow verglichen werden soll
+export interface IRowSelectionProps {
+  selectedRow?: any | any[]; // Welche Zeile wird hervorgehoben. Bei einem Array können mehrere Zeilen hervorgehoben werden (optional)
+  onChangeSelectedRow?: (data: any) => void; // Ausgewählte Zeile wurde verändert.
+  selectedRowProps?: (data: any) => object; // Wird pro ausgewählter Zeile aufgerufen. Ergebnis wird den Props der <tr> hinzugefügt.
+  columnName: string; // Mit welchem Column selectedRow verglichen werden soll
 }
 
 export type RowSelectionProps = IRowSelectionProps;
+export type SortDirection = "asc" | "desc";
 
 export interface IProps {
   data: any[];
   colDef?: IColDef[];
-  orderedBy?: IColDef;
-  desc: boolean;
+  orderBy?: string;
+  sort?: SortDirection;
   onChangeOrderBy?: (colDef: IColDef) => void;
   onChangeFilter?: ChangeFilterHandler;
   onRowClick?: (data: any) => void;
@@ -52,13 +53,11 @@ export interface IProps {
   filter?: object;
   defaultFilter?: object;
   ellipsis?: boolean;
-  selectedRow?: any|any[];                     
-  onChangeSelectedRow?: ((data: any) => void); 
-  selectedRowProps?: ((data: any) => object);  
-  rowSelectionColumnName?: string;             
-} 
-
-
+  selectedRow?: any | any[];
+  onChangeSelectedRow?: (data: any) => void;
+  selectedRowProps?: (data: any) => object;
+  rowSelectionColumnName?: string;
+}
 
 export type TableProps = IProps & ITableElements;
 

@@ -99,7 +99,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
           } else {
             // The user has not provided a function that provides a object for the row,
             // so default the background is set to grey
-            return { style: { background: "grey", cursor: this.props.onRowClick ? "pointer" : "default" } };
+            return {
+              style: {
+                background: "grey",
+                cursor: this.props.onRowClick ? "pointer" : "default"
+              }
+            };
           }
         } else {
           // This row is not in scope of the selectedRow Array
@@ -117,7 +122,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
           } else {
             // The user has not provided a function that provides a object for the row,
             // so default the background is set to grey
-            return { style: { background: "grey", cursor: this.props.onRowClick ? "pointer" : "default" } };
+            return {
+              style: {
+                background: "grey",
+                cursor: this.props.onRowClick ? "pointer" : "default"
+              }
+            };
           }
         } else {
           // This row is not the selected Row
@@ -137,7 +147,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
           } else {
             // The user has not provided a function that provides a object for the row,
             // so default the background is set to grey
-            return { style: { background: "grey", cursor: this.props.onRowClick ? "pointer" : "default" } };
+            return {
+              style: {
+                background: "grey",
+                cursor: this.props.onRowClick ? "pointer" : "default"
+              }
+            };
           }
         } else {
           // This row is not in scope of the selectedRow Array
@@ -153,7 +168,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
           } else {
             // The user has not provided a function that provides a object for the row,
             // so default the background is set to grey
-            return { style: { background: "grey", cursor: this.props.onRowClick ? "pointer" : "default" } };
+            return {
+              style: {
+                background: "grey",
+                cursor: this.props.onRowClick ? "pointer" : "default"
+              }
+            };
           }
         } else {
           // This row is not the selected Row
@@ -164,8 +184,12 @@ export class TablePlain extends React.Component<TableProps, IState> {
   }
 
   onClickCalls(data: any) {
-    if (this.props.onRowClick) { this.props.onRowClick(data); }
-    if (this.props.onChangeSelectedRow) { this.props.onChangeSelectedRow(data); }
+    if (this.props.onRowClick) {
+      this.props.onRowClick(data);
+    }
+    if (this.props.onChangeSelectedRow) {
+      this.props.onChangeSelectedRow(data);
+    }
   }
 
   renderRow(colDef: IColDef[], data: any, key: number) {
@@ -263,14 +287,14 @@ export class TablePlain extends React.Component<TableProps, IState> {
     function renderSubComponentSpacer(subComponent?: React.ReactNode) {
       return subComponent != null
         ? render(
-          { prop: "", header: "" },
-          -1,
-          {
-            width: "1%",
-            style: { paddingRight: 0 }
-          },
-          totalWidth
-        )
+            { prop: "", header: "" },
+            -1,
+            {
+              width: "1%",
+              style: { paddingRight: 0 }
+            },
+            totalWidth
+          )
         : null;
     }
 
@@ -319,10 +343,10 @@ export class TablePlain extends React.Component<TableProps, IState> {
         }
       >
         {colDef.header}
-        {this.props.orderedBy &&
-          this.props.orderedBy.prop === colDef.prop &&
+        {this.props.orderBy &&
+          this.props.orderBy === colDef.prop &&
           this.props.renderSortLabel &&
-          this.props.renderSortLabel(colDef, this.props.desc)}
+          this.props.renderSortLabel(colDef, this.props.sort === "desc")}
       </HeaderCell>
     );
   }
@@ -333,13 +357,13 @@ export class TablePlain extends React.Component<TableProps, IState> {
         this.handleFilterChange(colDef, v)
       )
     ) : (
-        <input
-          type="text"
-          name={colDef.prop}
-          value={this.filter[colDef.prop] || ""}
-          onChange={e => this.handleFilterChange(colDef, e.target.value)}
-        />
-      );
+      <input
+        type="text"
+        name={colDef.prop}
+        value={this.filter[colDef.prop] || ""}
+        onChange={e => this.handleFilterChange(colDef, e.target.value)}
+      />
+    );
   }
 
   renderFooter(colDef: IColDef[], data: any[]) {
@@ -443,14 +467,14 @@ export class TablePlain extends React.Component<TableProps, IState> {
   private ellipsisToCss(ellipsis?: boolean) {
     return ellipsis === true
       ? {
-        style: {
-          whiteSpace: "nowrap",
-          width: "100%",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          maxWidth: "auto"
+          style: {
+            whiteSpace: "nowrap",
+            width: "100%",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: "auto"
+          }
         }
-      }
       : undefined;
   }
 }
