@@ -2,7 +2,7 @@ import * as React from "react";
 
 type Fn = (colDef: IColDef, data: any) => React.ReactNode;
 type ElementContent = string | Fn;
-export type ChangeFilterHandler = (colDef: IColDef, value: any) => void;
+export type ChangeFilterHandler = (orderBy: string, value: any) => void;
 
 interface ITableElements {
   rootElement?: React.ReactNode;
