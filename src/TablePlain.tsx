@@ -336,7 +336,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
       <HeaderCell
         key={idx}
         {...colDef.headerProps}
-        onClick={() => colDef.sortable && this.handleChangeSort(colDef)}
+        onClick={() => colDef.sortable && this.handleChangeSort(colDef.prop)}
         {...ps}
         width={
           colDef.width ? `${(colDef.width! / totalWidth!) * 100}%` : undefined
@@ -418,9 +418,9 @@ export class TablePlain extends React.Component<TableProps, IState> {
     return [];
   }
 
-  handleChangeSort = (colDef: IColDef) => {
+  handleChangeSort = (orderBy: string) => {
     if (this.props.onChangeOrderBy) {
-      this.props.onChangeOrderBy(colDef);
+      this.props.onChangeOrderBy(orderBy);
     }
   };
 
