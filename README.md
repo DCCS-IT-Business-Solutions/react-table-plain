@@ -60,8 +60,8 @@ function App() {
 | renderSortLabel?          | colDef: IColDef, desc: boolean) => React.ReactNode           | x        | Render the sort label (arrow down/up) in header                                                                                                            |
 | data                      | any[]                                                        |          | Data array to render                                                                                                                                       |
 | colDef?                   | IColDef[]                                                    | x        | Definitions for all columns                                                                                                                                |
-| orderedBy?                | IColDef                                                      | x        |
-| desc                      | boolean                                                      |          |
+| orderBy?                  | string                                                       | x        |
+| sort?                     | "asc" \| "desc"                                              |          |
 | onChangeOrderBy?          | colDef: IColDef) => void                                     | x        | Called, when sorting changed                                                                                                                               |
 | onChangeFilter?           | ChangeFilterHandler                                          | x        | Called, when filter changed                                                                                                                                |
 | onRowClick?               | data: any) => void                                           | x        | Called, when one row has bee clicked                                                                                                                       |
@@ -91,7 +91,7 @@ react-table-plain supports sorting by a single column.
 class App extends React.Component {
   state = {
     orderby: "",
-    desc: false,
+    sort: "asc",
     data: [
       { id: 1, name: "Alexa" },
       { id: 2, name: "Google Home" },
@@ -113,22 +113,22 @@ class App extends React.Component {
             sortable: true
           }
         ]}
-        orderedBy={this.state.orderby}
-        desc={this.state.desc}
+        orderBy={this.state.orderby}
+        sort={this.state.sort}
         onChangeOrderBy={this.handleChangeOrderBy}
       />
     );
   }
 
   handleChangeOrderBy = col => {
-    let desc = false;
+    let sort? : SortDirection;
     if (this.state.orderby === col.prop) {
-      desc = !this.state.desc;
+      sort = this.state.sort === "desc" ? "asc" : "desc";
     }
     this.setState(prev => ({
       orderby: col.prop,
-      desc,
-      data: sortData(prev.data, col.prop, desc)
+      sort,
+      data: sortData(prev.data, col.prop, sort)
     }));
   };
 }
@@ -402,6 +402,7 @@ function handleSelectionChange(data) {
   rowSelectionColumnName="id"
 />;
 ```
+
 [![Edit react-table-plain multi-line-selection](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/oxxw81kmnz?fontsize=14)
 
 ### Content styling
