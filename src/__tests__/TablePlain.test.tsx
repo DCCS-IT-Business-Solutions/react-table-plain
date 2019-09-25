@@ -4,18 +4,14 @@ import { TablePlain } from "../TablePlain";
 import { IColDef } from "..";
 
 it("should render", () => {
-  const sut = shallow(<TablePlain data={[]} desc={false} />);
+  const sut = shallow(<TablePlain data={[]} />);
   expect(sut).toMatchSnapshot();
 });
 
 it("should call onRowClick if row is clicked", () => {
   const handleRowClick = jest.fn();
   const sut = shallow(
-    <TablePlain
-      data={[{ a: 1, b: 2 }]}
-      desc={false}
-      onRowClick={handleRowClick}
-    />
+    <TablePlain data={[{ a: 1, b: 2 }]} onRowClick={handleRowClick} />
   );
 
   sut
@@ -30,7 +26,6 @@ it("should set row props", () => {
   const sut = shallow(
     <TablePlain
       data={[{ a: 1, b: 2 }]}
-      desc={false}
       rowProps={() => ({
         style: { background: "yellow" },
         className: "catchMeIfYouCan"
@@ -47,7 +42,6 @@ it("should call renderRoot if provided", () => {
   const sut = shallow(
     <TablePlain
       data={[]}
-      desc={false}
       renderRoot={children => <div className="table">{children}</div>}
     />
   );
@@ -61,7 +55,6 @@ describe("subComponent", () => {
     const sut = mount(
       <TablePlain
         data={[{ a: 1, b: 2 }]}
-        desc={false}
         subComponent={() => <h1>Dummy</h1>}
         onRowClick={handleRowClick}
       />
@@ -81,7 +74,6 @@ describe("column width", () => {
     const sut = mount(
       <TablePlain
         data={[{ a: 1, b: 2 }]}
-        desc={false}
         colDef={[
           {
             prop: "a",
@@ -109,7 +101,6 @@ describe("filter", () => {
     const sut = mount(
       <TablePlain
         data={[{ a: 1, b: 2 }]}
-        desc={false}
         colDef={[
           {
             prop: "a",
@@ -129,7 +120,6 @@ describe("filter", () => {
     const sut = mount(
       <TablePlain
         data={[{ a: 1, b: 2 }]}
-        desc={false}
         colDef={[
           {
             prop: "a",
@@ -152,7 +142,6 @@ describe("filter", () => {
     const sut = mount(
       <TablePlain
         data={[{ a: 1, b: 2 }]}
-        desc={false}
         colDef={[
           {
             prop: "a",
@@ -181,7 +170,6 @@ describe("filter", () => {
     const sut = mount(
       <TablePlain
         data={[{ a: 1, b: 2 }]}
-        desc={false}
         colDef={[
           {
             prop: "a",
@@ -207,7 +195,6 @@ describe("filter", () => {
       const sut = mount(
         <TablePlain
           data={[{ a: 1, b: 2 }]}
-          desc={false}
           filter={filter}
           colDef={[
             {
@@ -231,7 +218,6 @@ describe("filter", () => {
       const sut = mount(
         <TablePlain
           data={[{ a: 1, b: 2 }]}
-          desc={false}
           filter={filter}
           onChangeFilter={handleChangeFilter}
           colDef={[
@@ -252,11 +238,11 @@ describe("filter", () => {
 
     it("should should reflect changes to filter", () => {
       const filter = { a: "test" };
-      const handleChangeFilter = (x: IColDef, v: any) => (filter[x.prop] = v);
+      const handleChangeFilter = (orderBy: string, v: any) =>
+        (filter[orderBy] = v);
       const sut = mount(
         <TablePlain
           data={[{ a: 1, b: 2 }]}
-          desc={false}
           filter={filter}
           onChangeFilter={handleChangeFilter}
           colDef={[
@@ -288,7 +274,6 @@ describe("filter", () => {
         sut = mount(
           <TablePlain
             data={[{ a: 1, b: 2 }]}
-            desc={false}
             colDef={[{ prop: "a", header: "A", align: alignment, footer: "" }]}
           />
         );
@@ -315,7 +300,6 @@ describe("filter", () => {
         const sut = mount(
           <TablePlain
             data={[{ a: 1, b: 2 }]}
-            desc={false}
             colDef={[{ prop: "a", header: "A" }]}
             ellipsis={true}
           />
@@ -332,7 +316,6 @@ describe("filter", () => {
         <TablePlain
           cellProps={data => ({ "data-test": data.a })}
           data={[{ a: 1, b: 2 }]}
-          desc={false}
           colDef={[{ prop: "a", header: "A" }]}
         />
       );
@@ -353,7 +336,6 @@ describe("single row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
@@ -384,7 +366,6 @@ describe("single row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={data[1].a}
         selectedRowProps={selectedRowProps}
@@ -421,7 +402,6 @@ describe("single row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={data[1].a}
         // selectedRowProps={selectedRowProps}
@@ -435,14 +415,14 @@ describe("single row selection", () => {
         .find("tbody tr")
         .at(1)
         .props().style
-    ).toEqual({ background: "grey",cursor:"default" });
+    ).toEqual({ background: "grey", cursor: "default" });
 
     expect(
       sut
         .find("tbody tr")
         .at(0)
         .props().style
-    ).not.toEqual({ background: "grey" ,cursor:"default"});
+    ).not.toEqual({ background: "grey", cursor: "default" });
   });
 
   it("should compare the whole object because no ColumName is provided", () => {
@@ -458,7 +438,6 @@ describe("single row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={data[1]}
         selectedRowProps={selectedRowProps}
@@ -494,7 +473,6 @@ describe("multi row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
@@ -535,7 +513,6 @@ describe("multi row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={[data[1].a, data[0].a]}
         selectedRowProps={selectedRowProps}
@@ -579,7 +556,6 @@ describe("multi row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -622,7 +598,6 @@ describe("multi row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={[data[1].a, data[0].a]}
         // selectedRowProps={selectedRowProps}
@@ -636,21 +611,21 @@ describe("multi row selection", () => {
         .find("tbody tr")
         .at(1)
         .props().style
-    ).toEqual({ background: "grey", cursor:"default" });
+    ).toEqual({ background: "grey", cursor: "default" });
 
     expect(
       sut
         .find("tbody tr")
         .at(0)
         .props().style
-    ).toEqual({ background: "grey",cursor:"default" });
+    ).toEqual({ background: "grey", cursor: "default" });
 
     expect(
       sut
         .find("tbody tr")
         .at(2)
         .props().style
-    ).not.toEqual({ background: "grey",cursor:"default" });
+    ).not.toEqual({ background: "grey", cursor: "default" });
   });
 
   it("should compare the whole object because no ColumName is provided", () => {
@@ -666,7 +641,6 @@ describe("multi row selection", () => {
     const sut = mount(
       <TablePlain
         data={data}
-        desc={false}
         colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
         selectedRow={[data[1], data[0]]}
         selectedRowProps={selectedRowProps}

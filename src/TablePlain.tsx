@@ -88,9 +88,9 @@ export class TablePlain extends React.Component<TableProps, IState> {
       if (Array.isArray(this.props.selectedRow)) {
         // This is a multi-line selectable table
         if (
-          this.props.selectedRow.includes(
+          this.props.selectedRow!.indexOf(
             data[this.props.rowSelectionColumnName]
-          )
+          ) !== -1
         ) {
           // This row is in scope of the selectedRow Array
           if (this.props.selectedRowProps != null) {
@@ -139,7 +139,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
       // so default the selectedRow is compared with the whole data object
       if (Array.isArray(this.props.selectedRow)) {
         // This is a multi-line selectable table
-        if (this.props.selectedRow.includes(data)) {
+        if (this.props.selectedRow.indexOf(data) !== -1) {
           // This row is in scope of the selectedRow Array
           if (this.props.selectedRowProps != null) {
             // The user has provided a function that provides a object for the row
