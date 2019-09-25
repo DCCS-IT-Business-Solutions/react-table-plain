@@ -33,7 +33,6 @@
   },
   "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-table-plain#readme",
   "dependencies": {
-    "docz": "^2.0.0-rc.28",
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
