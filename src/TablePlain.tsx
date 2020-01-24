@@ -360,8 +360,16 @@ export class TablePlain extends React.Component<TableProps, IState> {
       <input
         type="text"
         name={colDef.prop}
-        value={this.filter[colDef.prop] || ""}
-        onChange={e => this.handleFilterChange(colDef.prop, e.target.value)}
+        onKeyDown={e => {
+          const code = e.keyCode || e.which;
+          if (code === 13) {
+            // 13 is the enter keycode
+            e.currentTarget.blur();
+          }
+        }}
+        onBlur={e => {
+          this.handleFilterChange(colDef.prop, e.target.value);
+        }}
       />
     );
   }
