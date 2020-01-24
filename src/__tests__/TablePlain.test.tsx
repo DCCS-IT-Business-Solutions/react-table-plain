@@ -116,6 +116,27 @@ describe("filter", () => {
     expect(inputs.length).toBe(1);
   });
 
+  it("should render a onblur filter", () => {
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            filterable: true
+          }
+        ]}
+        filterBlur={true}
+      />
+    );
+
+    const inputs = sut.find("input[type='text']");
+    expect(inputs.length).toBe(1);
+    expect(inputs.prop("onChange")).toBe(undefined);
+    expect(inputs.prop("onBlur")).toBeDefined();
+  });
+
   it("should render a custom filter component", () => {
     const sut = mount(
       <TablePlain
@@ -330,13 +351,20 @@ describe("single row selection", () => {
     function selectedRowProps() {
       return { background: "red" };
     }
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -360,13 +388,20 @@ describe("single row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={data[1].a}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -396,13 +431,20 @@ describe("single row selection", () => {
     //   return { style: selectedRowProp };
     // }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={data[1].a}
         // selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -432,13 +474,20 @@ describe("single row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={data[1]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -467,13 +516,20 @@ describe("multi row selection", () => {
     function selectedRowProps() {
       return { background: "red" };
     }
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -507,13 +563,20 @@ describe("multi row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={[data[1].a, data[0].a]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -550,13 +613,20 @@ describe("multi row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
         rowSelectionColumnName="a"
@@ -592,13 +662,20 @@ describe("multi row selection", () => {
     //   return { style: selectedRowProp };
     // }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={[data[1].a, data[0].a]}
         // selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -635,13 +712,20 @@ describe("multi row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 }
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" }
+        ]}
         selectedRow={[data[1], data[0]]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
