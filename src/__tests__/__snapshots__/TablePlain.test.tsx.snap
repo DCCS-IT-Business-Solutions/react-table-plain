@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`cell styling align ellipsis should apply to all body cells 1`] = `
+Object {
+  "children": 1,
+  "style": Object {
+    "maxWidth": "auto",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "whiteSpace": "nowrap",
+    "width": "100%",
+  },
+}
+`;
+
+exports[`cell styling ellipsis should apply to all body cells 1`] = `
+Object {
+  "children": 1,
+  "style": Object {
+    "maxWidth": "auto",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "whiteSpace": "nowrap",
+    "width": "100%",
+  },
+}
+`;
+
 exports[`filter cell styling ellipsis should apply to all body cells 1`] = `
 Object {
   "children": 1,

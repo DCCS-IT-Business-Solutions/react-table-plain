@@ -17,7 +17,7 @@ interface ITableElements {
 
 export enum RowSelectionType {
   "single-line",
-  "multi-line"
+  "multi-line",
 }
 
 export interface IRowSelectionProps {
@@ -63,7 +63,7 @@ export type TableProps = ITablePlainProps & ITableElements;
 
 export interface IColDef {
   prop: string;
-  header: string | ElementContent;
+  header: string | ElementContent | React.ReactNode;
   accessor?: (data: any) => string;
   width?: number;
   render?: (data: any) => React.ReactNode;

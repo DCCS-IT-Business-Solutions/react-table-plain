@@ -14,10 +14,7 @@ it("should call onRowClick if row is clicked", () => {
     <TablePlain data={[{ a: 1, b: 2 }]} onRowClick={handleRowClick} />
   );
 
-  sut
-    .find("tbody tr")
-    .at(0)
-    .simulate("click");
+  sut.find("tbody tr").at(0).simulate("click");
 
   expect(handleRowClick).toBeCalled();
 });
@@ -28,7 +25,7 @@ it("should set row props", () => {
       data={[{ a: 1, b: 2 }]}
       rowProps={() => ({
         style: { background: "yellow" },
-        className: "catchMeIfYouCan"
+        className: "catchMeIfYouCan",
       })}
     />
   );
@@ -42,7 +39,7 @@ it("should call renderRoot if provided", () => {
   const sut = shallow(
     <TablePlain
       data={[]}
-      renderRoot={children => <div className="table">{children}</div>}
+      renderRoot={(children) => <div className="table">{children}</div>}
     />
   );
 
@@ -78,13 +75,13 @@ describe("column width", () => {
           {
             prop: "a",
             header: "A",
-            width: 1
+            width: 1,
           },
           {
             prop: "b",
             header: "B",
-            width: 3
-          }
+            width: 3,
+          },
         ]}
       />
     );
@@ -105,8 +102,8 @@ describe("filter", () => {
           {
             prop: "a",
             header: "A",
-            filterable: true
-          }
+            filterable: true,
+          },
         ]}
       />
     );
@@ -125,8 +122,8 @@ describe("filter", () => {
             prop: "a",
             header: "A",
             filterable: true,
-            renderFilter: () => <hr className="catchMeIfYouCan" />
-          }
+            renderFilter: () => <hr className="catchMeIfYouCan" />,
+          },
         ]}
       />
     );
@@ -148,12 +145,12 @@ describe("filter", () => {
             header: "A",
             filterable: true,
             renderFilter: (v, handleChange) => (
-              <select value={v} onChange={e => handleChange(e.target.value)}>
+              <select value={v} onChange={(e) => handleChange(e.target.value)}>
                 <option>1</option>
                 <option>{optionToSelect}</option>
               </select>
-            )
-          }
+            ),
+          },
         ]}
         onChangeFilter={handleChangeFilter}
       />
@@ -174,8 +171,8 @@ describe("filter", () => {
           {
             prop: "a",
             header: "A",
-            filterable: true
-          }
+            filterable: true,
+          },
         ]}
         subComponent={() => <span>Dummy</span>}
       />
@@ -200,8 +197,8 @@ describe("filter", () => {
             {
               prop: "a",
               header: "A",
-              filterable: true
-            }
+              filterable: true,
+            },
           ]}
         />
       );
@@ -224,8 +221,8 @@ describe("filter", () => {
             {
               prop: "a",
               header: "A",
-              filterable: true
-            }
+              filterable: true,
+            },
           ]}
         />
       );
@@ -249,8 +246,8 @@ describe("filter", () => {
             {
               prop: "a",
               header: "A",
-              filterable: true
-            }
+              filterable: true,
+            },
           ]}
         />
       );
@@ -265,48 +262,70 @@ describe("filter", () => {
       expect(input.props().value).toBe("changed");
     });
   });
+});
 
-  describe("cell styling", () => {
-    describe("align", () => {
-      let sut = null;
-      const alignment = "center";
-      beforeEach(() => {
-        sut = mount(
-          <TablePlain
-            data={[{ a: 1, b: 2 }]}
-            colDef={[{ prop: "a", header: "A", align: alignment, footer: "" }]}
-          />
-        );
-      });
-
-      it("should align cell content", () => {
-        const style = sut.find("tbody > tr > td").props().style;
-        expect(style.textAlign).toBe(alignment);
-      });
-
-      it("should align header content", () => {
-        const style = sut.find("thead > tr > th").props().style;
-        expect(style.textAlign).toBe(alignment);
-      });
-
-      it("should align footer content", () => {
-        const style = sut.find("tfoot > tr > td").props().style;
-        expect(style.textAlign).toBe(alignment);
-      });
+describe("cell styling", () => {
+  describe("align", () => {
+    let sut = null;
+    const alignment = "center";
+    beforeEach(() => {
+      sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          colDef={[{ prop: "a", header: "A", align: alignment, footer: "" }]}
+        />
+      );
     });
 
-    describe("ellipsis", () => {
-      it("should apply to all body cells", () => {
-        const sut = mount(
-          <TablePlain
-            data={[{ a: 1, b: 2 }]}
-            colDef={[{ prop: "a", header: "A" }]}
-            ellipsis={true}
-          />
-        );
+    it("should align cell content", () => {
+      const style = sut.find("tbody > tr > td").props().style;
+      expect(style.textAlign).toBe(alignment);
+    });
 
-        expect(sut.find("tbody > tr > td").props()).toMatchSnapshot();
-      });
+    it("should align header content", () => {
+      const style = sut.find("thead > tr > th").props().style;
+      expect(style.textAlign).toBe(alignment);
+    });
+
+    it("should align footer content", () => {
+      const style = sut.find("tfoot > tr > td").props().style;
+      expect(style.textAlign).toBe(alignment);
+    });
+
+  describe("header", () => {
+    it("should render header from strings", () => {
+      sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          colDef={[{ prop: "a", header: "A" }]}
+        />);
+      const text = sut.find("thead > tr > th").first().text();
+      expect(text).toEqual("A");
+
+    });
+
+    it("should render header from components", () => {
+      sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          colDef={[{ prop: "a", header: <strong>B</strong> }]}
+        />);
+      const text = sut.find("thead > tr > th").first().childAt(0).html();
+      expect(text).toEqual("<strong>B</strong>");
+    });
+  });
+
+  describe("ellipsis", () => {
+    it("should apply to all body cells", () => {
+      const sut = mount(
+        <TablePlain
+          data={[{ a: 1, b: 2 }]}
+          colDef={[{ prop: "a", header: "A" }]}
+          ellipsis={true}
+        />
+      );
+
+      expect(sut.find("tbody > tr > td").props()).toMatchSnapshot();
     });
   });
 
@@ -314,7 +333,7 @@ describe("filter", () => {
     it("should apply properties to all tbody cells", () => {
       const sut = mount(
         <TablePlain
-          cellProps={data => ({ "data-test": data.a })}
+          cellProps={(data) => ({ "data-test": data.a })}
           data={[{ a: 1, b: 2 }]}
           colDef={[{ prop: "a", header: "A" }]}
         />
@@ -330,13 +349,20 @@ describe("single row selection", () => {
     function selectedRowProps() {
       return { background: "red" };
     }
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -345,10 +371,7 @@ describe("single row selection", () => {
     );
 
     // Click first row
-    sut
-      .find("tbody tr")
-      .at(0)
-      .simulate("click");
+    sut.find("tbody tr").at(0).simulate("click");
 
     expect(onSelect).toBeCalledWith(data[0]);
   });
@@ -360,13 +383,20 @@ describe("single row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={data[1].a}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -374,19 +404,9 @@ describe("single row selection", () => {
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(1).props().style).toBe(selectedRowProp);
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).not.toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(0).props().style).not.toBe(selectedRowProp);
   });
 
   it("should highlite the second row in grey because no selectedRowProps are provided", () => {
@@ -396,13 +416,20 @@ describe("single row selection", () => {
     //   return { style: selectedRowProp };
     // }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={data[1].a}
         // selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -410,19 +437,15 @@ describe("single row selection", () => {
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).toEqual({ background: "grey", cursor: "default" });
+    expect(sut.find("tbody tr").at(1).props().style).toEqual({
+      background: "grey",
+      cursor: "default",
+    });
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).not.toEqual({ background: "grey", cursor: "default" });
+    expect(sut.find("tbody tr").at(0).props().style).not.toEqual({
+      background: "grey",
+      cursor: "default",
+    });
   });
 
   it("should compare the whole object because no ColumName is provided", () => {
@@ -432,13 +455,20 @@ describe("single row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={data[1]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -446,19 +476,9 @@ describe("single row selection", () => {
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(1).props().style).toBe(selectedRowProp);
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).not.toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(0).props().style).not.toBe(selectedRowProp);
   });
 });
 
@@ -467,13 +487,20 @@ describe("multi row selection", () => {
     function selectedRowProps() {
       return { background: "red" };
     }
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -482,18 +509,12 @@ describe("multi row selection", () => {
     );
 
     // Click first row
-    sut
-      .find("tbody tr")
-      .at(0)
-      .simulate("click");
+    sut.find("tbody tr").at(0).simulate("click");
 
     expect(onSelect).toBeCalledWith(data[0]);
 
     // Click second row
-    sut
-      .find("tbody tr")
-      .at(1)
-      .simulate("click");
+    sut.find("tbody tr").at(1).simulate("click");
 
     expect(onSelect).toBeCalledWith(data[1]);
 
@@ -507,13 +528,20 @@ describe("multi row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={[data[1].a, data[0].a]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -521,26 +549,11 @@ describe("multi row selection", () => {
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(1).props().style).toBe(selectedRowProp);
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(0).props().style).toBe(selectedRowProp);
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(2)
-        .props().style
-    ).not.toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(2).props().style).not.toBe(selectedRowProp);
   });
 
   it("should not highlite any row", () => {
@@ -550,39 +563,37 @@ describe("multi row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
         rowSelectionColumnName="a"
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).not.toEqual(selectedRowProp);
+    expect(sut.find("tbody tr").at(0).props().style).not.toEqual(
+      selectedRowProp
+    );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).not.toEqual(selectedRowProp);
+    expect(sut.find("tbody tr").at(1).props().style).not.toEqual(
+      selectedRowProp
+    );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(2)
-        .props().style
-    ).not.toEqual(selectedRowProp);
+    expect(sut.find("tbody tr").at(2).props().style).not.toEqual(
+      selectedRowProp
+    );
   });
 
   it("should highlite the first and second row in grey but not the third becuase no selectedRowProps is provided", () => {
@@ -592,13 +603,20 @@ describe("multi row selection", () => {
     //   return { style: selectedRowProp };
     // }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={[data[1].a, data[0].a]}
         // selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -606,26 +624,20 @@ describe("multi row selection", () => {
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).toEqual({ background: "grey", cursor: "default" });
+    expect(sut.find("tbody tr").at(1).props().style).toEqual({
+      background: "grey",
+      cursor: "default",
+    });
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).toEqual({ background: "grey", cursor: "default" });
+    expect(sut.find("tbody tr").at(0).props().style).toEqual({
+      background: "grey",
+      cursor: "default",
+    });
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(2)
-        .props().style
-    ).not.toEqual({ background: "grey", cursor: "default" });
+    expect(sut.find("tbody tr").at(2).props().style).not.toEqual({
+      background: "grey",
+      cursor: "default",
+    });
   });
 
   it("should compare the whole object because no ColumName is provided", () => {
@@ -635,13 +647,20 @@ describe("multi row selection", () => {
       return { style: selectedRowProp };
     }
 
-    const data = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }];
+    const data = [
+      { a: 1, b: 2 },
+      { a: 2, b: 2 },
+      { a: 3, b: 2 },
+    ];
     const onSelect = jest.fn();
 
     const sut = mount(
       <TablePlain
         data={data}
-        colDef={[{ prop: "a", header: "A" }, { prop: "b", header: "Test" }]}
+        colDef={[
+          { prop: "a", header: "A" },
+          { prop: "b", header: "Test" },
+        ]}
         selectedRow={[data[1], data[0]]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -649,25 +668,10 @@ describe("multi row selection", () => {
       />
     );
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(1)
-        .props().style
-    ).toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(1).props().style).toBe(selectedRowProp);
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(0)
-        .props().style
-    ).toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(0).props().style).toBe(selectedRowProp);
 
-    expect(
-      sut
-        .find("tbody tr")
-        .at(2)
-        .props().style
-    ).not.toBe(selectedRowProp);
+    expect(sut.find("tbody tr").at(2).props().style).not.toBe(selectedRowProp);
   });
 });
