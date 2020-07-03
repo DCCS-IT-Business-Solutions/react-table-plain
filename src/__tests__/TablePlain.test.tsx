@@ -312,10 +312,10 @@ describe("cell styling", () => {
       const style = sut.find("tfoot > tr > td").props().style;
       expect(style.textAlign).toBe(alignment);
     });
+  });
 
   describe("header", () => {
-    it("should render header from strings", () => {
-      sut = mount(
+      const sut = mount(
         <TablePlain
           data={[{ a: 1, b: 2 }]}
           colDef={[{ prop: "a", header: "A" }]}
@@ -326,7 +326,7 @@ describe("cell styling", () => {
     });
 
     it("should render header from components", () => {
-      sut = mount(
+      const sut = mount(
         <TablePlain
           data={[{ a: 1, b: 2 }]}
           colDef={[{ prop: "a", header: <strong>B</strong> }]}
