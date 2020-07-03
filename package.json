@@ -1,6 +1,6 @@
 {
   "name": "@dccs/react-table-plain",
-  "version": "0.6.7",
+  "version": "0.7.1",
   "description": "A NPM package that helps creating HTML tables in a React-way.",
   "main": "lib/index.js",
   "scripts": {

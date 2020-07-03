@@ -113,6 +113,27 @@ describe("filter", () => {
     expect(inputs.length).toBe(1);
   });
 
+  it("should render a onblur filter", () => {
+    const sut = mount(
+      <TablePlain
+        data={[{ a: 1, b: 2 }]}
+        colDef={[
+          {
+            prop: "a",
+            header: "A",
+            filterable: true
+          }
+        ]}
+        filterBlur={true}
+      />
+    );
+
+    const inputs = sut.find("input[type='text']");
+    expect(inputs.length).toBe(1);
+    expect(inputs.prop("onChange")).toBe(undefined);
+    expect(inputs.prop("onBlur")).toBeDefined();
+  });
+
   it("should render a custom filter component", () => {
     const sut = mount(
       <TablePlain
@@ -352,7 +373,7 @@ describe("single row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -361,7 +382,7 @@ describe("single row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
@@ -386,7 +407,7 @@ describe("single row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -395,7 +416,7 @@ describe("single row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={data[1].a}
         selectedRowProps={selectedRowProps}
@@ -419,7 +440,7 @@ describe("single row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -428,7 +449,7 @@ describe("single row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={data[1].a}
         // selectedRowProps={selectedRowProps}
@@ -458,7 +479,7 @@ describe("single row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -467,7 +488,7 @@ describe("single row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={data[1]}
         selectedRowProps={selectedRowProps}
@@ -490,7 +511,7 @@ describe("multi row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -499,7 +520,7 @@ describe("multi row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={null}
         selectedRowProps={selectedRowProps}
@@ -531,7 +552,7 @@ describe("multi row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -540,7 +561,7 @@ describe("multi row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={[data[1].a, data[0].a]}
         selectedRowProps={selectedRowProps}
@@ -566,7 +587,7 @@ describe("multi row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -575,7 +596,7 @@ describe("multi row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRowProps={selectedRowProps}
         onChangeSelectedRow={onSelect}
@@ -606,7 +627,7 @@ describe("multi row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -615,7 +636,7 @@ describe("multi row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={[data[1].a, data[0].a]}
         // selectedRowProps={selectedRowProps}
@@ -650,7 +671,7 @@ describe("multi row selection", () => {
     const data = [
       { a: 1, b: 2 },
       { a: 2, b: 2 },
-      { a: 3, b: 2 },
+      { a: 3, b: 2 }
     ];
     const onSelect = jest.fn();
 
@@ -659,7 +680,7 @@ describe("multi row selection", () => {
         data={data}
         colDef={[
           { prop: "a", header: "A" },
-          { prop: "b", header: "Test" },
+          { prop: "b", header: "Test" }
         ]}
         selectedRow={[data[1], data[0]]}
         selectedRowProps={selectedRowProps}

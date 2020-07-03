@@ -352,11 +352,7 @@ export class TablePlain extends React.Component<TableProps, IState> {
   }
 
   renderFilter(colDef: IColDef, idx: number) {
-    return colDef.renderFilter ? (
-      colDef.renderFilter(this.filter[colDef.prop], (v: any) =>
-        this.handleFilterChange(colDef.prop, v)
-      )
-    ) : (
+    let input = (
       <input
         type="text"
         name={colDef.prop}
@@ -364,6 +360,31 @@ export class TablePlain extends React.Component<TableProps, IState> {
         onChange={e => this.handleFilterChange(colDef.prop, e.target.value)}
       />
     );
+
+    if (this.props.filterBlur === true) {
+      input = (
+        <input
+          type="text"
+          name={colDef.prop}
+          onKeyDown={e => {
+            const code = e.keyCode || e.which;
+            if (code === 13) {
+              // 13 is the enter keycode
+              e.currentTarget.blur();
+            }
+          }}
+          onBlur={e => {
+            this.handleFilterChange(colDef.prop, e.target.value);
+          }}
+        />
+      );
+    }
+
+    return colDef.renderFilter
+      ? colDef.renderFilter(this.filter[colDef.prop], (v: any) =>
+          this.handleFilterChange(colDef.prop, v)
+        )
+      : input;
   }
 
   renderFooter(colDef: IColDef[], data: any[]) {

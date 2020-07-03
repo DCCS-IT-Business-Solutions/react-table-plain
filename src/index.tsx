@@ -57,6 +57,7 @@ export interface ITablePlainProps {
   onChangeSelectedRow?: (data: any) => void;
   selectedRowProps?: (data: any) => object;
   rowSelectionColumnName?: string;
+  filterBlur?: boolean;
 }
 
 export type TableProps = ITablePlainProps & ITableElements;
